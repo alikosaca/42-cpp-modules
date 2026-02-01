@@ -12,8 +12,8 @@ class PhoneBook{
 	PhoneBook();
 	~PhoneBook();
 
-	void add(std::string name, std::string phoneNumber);
-	void display();
+	void add(const std::string& firstName, const std::string& lastName, const std::string& nickName, const std::string& phoneNumber, const std::string& darkestSecret);
+	void search();
 };
 
 #endif
