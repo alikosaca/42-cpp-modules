@@ -3,7 +3,7 @@ NAME = ./a.out
 CPP = c++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC = PhoneBook.cpp 
+SRC = Contact.cpp PhoneBook.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
