@@ -18,13 +18,6 @@ void PhoneBook::add(const std::string& firstName, const std::string& lastName, c
 	std::cout << "\e[32m" <<  firstName << " Başarıyla eklendi." << std::endl;
 }
 
-static std::string formatField(const std::string& s)
-{
-    if (s.size() > 10)
-        return s.substr(0, 9) + ".";
-    return s;
-}
-
 void PhoneBook::search()
 {
 	int id = (this->index < 8) ? this->index : 8;
@@ -33,13 +26,23 @@ void PhoneBook::search()
 		std::cout << "Rehber boş."  << std::endl;
 		return;
 	}
-	std::cout << "Index | First Name | Last Name | Nickname" << std::endl;
+	print::printSLn("---------------------------------------------", color::orange);
+	print::printS("|", color::orange);
+	print::printS("  Index|  First Name|  Last Name|  Nickname", color::blue);
+	print::printSLn("|", color::orange);
+	print::printSLn("---------------------------------------------", color::orange);
     for (int i = 0; i < id; ++i)
     {
-        std::cout << std::setw(5) << i << " | "
-                  << std::setw(10) << formatField(this->_contact[i].getFirstName()) << " | "
-                  << std::setw(10) << formatField(this->_contact[i].getLastName()) << " | "
-                  << std::setw(10) << formatField(this->_contact[i].getNickName()) << std::endl;
-    }
-
+		//std::cout << std::setw(6) << color::black <<☺ i << color::resetColor;
+        print::printS("|", color::orange);
+		std::cout << std::setw(7) << i;
+		std::cout << color::blue << std::setw(0) << "|" << color::resetColor;
+		std::cout << std::setw(12) << print::shorten(_contact[i].getFirstName());
+		print::printS("|", color::blue);
+        std::cout << std::setw(11) << print::shorten(_contact[i].getLastName());
+		print::printS("|", color::blue);
+        std::cout << std::setw(10) << print::shorten(_contact[i].getNickName());
+		print::printSLn("|", color::orange);
+	}			
+	print::printSLn("---------------------------------------------", color::orange);
 }

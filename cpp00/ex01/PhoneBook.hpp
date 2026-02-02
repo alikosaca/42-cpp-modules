@@ -2,6 +2,8 @@
 # define PHONEBOOK_HPP
 
 #include "Contact.hpp"
+#include "print.hpp"
+#include "color.hpp"
 
 class PhoneBook{
 	private:
