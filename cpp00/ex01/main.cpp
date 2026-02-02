@@ -1,5 +1,7 @@
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
+#include "Validation.hpp"
+
 
 int main(void)
 {
@@ -15,31 +17,20 @@ int main(void)
 	std::string darkestSecret;
 	bool run = true;
 
-	std::cout << "<<<--- Hoş Geldiniz! --->>>" << std::endl;
+	print::printSLn("<<<--- Welcome! --->>>", color::green);
 	while (run)
 	{
-		std::cout << "\e[0m" << "Lütfen bir seçeneği seçiniz: " << std::endl;
-		std::cout << "" << "ADD | SEARCH | EXIT" << std::endl;
+		print::printSLn("ADD | SEARCH | EXIT", color::white);
+		print::printS("Please select an option: ", color::blue);
 		std::getline(std::cin >> std::ws, response);
 		if (response == "ADD")
 		{
-			std::cout << "\e[36m" << "isim: ";
-			std::getline(std::cin >> std::ws, firstName);
-
-			std::cout << "soyisim: ";
-			std::getline(std::cin >> std::ws, lastName);
-
-			std::cout << "nick name: ";
-			std::getline(std::cin >> std::ws, nickName);
-			
-			std::cout << "phone number: ";
-			std::getline(std::cin >> std::ws, phoneNumber);
-
-			std::cout << "darkestSecret: ";
-			std::getline(std::cin >> std::ws, darkestSecret);
-
+			Validation::validString("Name: ", firstName);
+			Validation::validString("Last Name: ", lastName);
+			Validation::validString("Nickname", nickName);
+			Validation::validNumeric("Phone Number: ", phoneNumber);
+			Validation::validString("Darkset Secret: ", darkestSecret);
 			book.add(firstName, lastName, nickName, phoneNumber, darkestSecret);
-	
 		}
 		else if (response == "SEARCH")
 		{
@@ -47,10 +38,9 @@ int main(void)
 		}
 		else if (response == "EXIT")
 		{
-			std::cout << "Program kapandı." << std::endl;
+			print::printSLn("Have a nice day. Exit enabled", color::green);
 			break;
 		}
 	}
-	
 	return 0;
 }
