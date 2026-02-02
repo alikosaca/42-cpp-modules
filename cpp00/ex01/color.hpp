@@ -14,6 +14,8 @@ class color{
 	static std::string orange;
 	static std::string black;
 	static std::string blue;
+	static std::string white;
+	static std::string gray;
 	static std::string resetColor;
 };
 
