@@ -3,7 +3,7 @@ NAME = ./a.out
 CPP = c++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC = Contact.cpp PhoneBook.cpp print.cpp print.hpp color.hpp color.cpp Validation.hpp Validation.cpp main.cpp
+SRC = Contact.cpp PhoneBook.cpp Print.cpp Color.cpp Validation.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
@@ -17,7 +17,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
-
 
 clean:
 	$(RM) $(OBJ)

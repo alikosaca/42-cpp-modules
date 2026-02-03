@@ -17,17 +17,17 @@ int main(void)
 	std::string darkestSecret;
 	bool run = true;
 
-	print::printSLn("<<<--- Welcome! --->>>", color::green);
+	Print::printSLn("<<<--- Welcome! --->>>", Color::Green());
 	while (run)
 	{
-		print::printSLn("ADD | SEARCH | EXIT", color::white);
-		print::printS("Please select an option: ", color::blue);
+		Print::printSLn("ADD | SEARCH | EXIT", Color::White());
+		Print::printS("Please select an option: ", Color::Blue());
 		std::getline(std::cin >> std::ws, response);
 		if (response == "ADD")
 		{
 			Validation::validString("Name: ", firstName);
 			Validation::validString("Last Name: ", lastName);
-			Validation::validString("Nickname", nickName);
+			Validation::validString("Nickname: ", nickName);
 			Validation::validNumeric("Phone Number: ", phoneNumber);
 			Validation::validString("Darkset Secret: ", darkestSecret);
 			book.add(firstName, lastName, nickName, phoneNumber, darkestSecret);
@@ -38,7 +38,7 @@ int main(void)
 		}
 		else if (response == "EXIT")
 		{
-			print::printSLn("Have a nice day. Exit enabled", color::green);
+			Print::printSLn("Have a nice day. Exit enabled", Color::Green());
 			break;
 		}
 	}

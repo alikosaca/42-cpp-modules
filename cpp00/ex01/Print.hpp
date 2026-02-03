@@ -3,12 +3,12 @@
 
 #include <string>
 #include <iostream>
-#include "color.hpp"
+#include "Color.hpp"
 
-class print{
+class Print{
 	public:
-	print();
-	~print();
+	Print();
+	~Print();
 
 	static std::string shorten(const std::string& value);
 	static void printS(const std::string& value, const std::string& color);

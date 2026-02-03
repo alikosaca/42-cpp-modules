@@ -6,14 +6,14 @@ Validation::~Validation(){}
 int Validation::isValidString(const std::string& value){
 	if(value.empty())
 	{
-		print::printSLn("It cannot be empty!", color::red);
+		Print::printSLn("It cannot be empty!", Color::Red());
 		return 1;
 	}
 	for(size_t i = 0; i < value.length(); i++)
 	{
 		if(!std::isprint(value[i]))
 		{
-			print::printSLn("It should be printable ascii value", color::red);
+			Print::printSLn("It should be printable ascii value", Color::Red());
 			return 1;
 		}
 	}
@@ -23,14 +23,14 @@ int Validation::isValidString(const std::string& value){
 int Validation::isNumeric(const std::string& value){
 	if(value.empty())
 	{
-		print::printSLn("It cannot be empty!", color::red);
+		Print::printSLn("It cannot be empty!", Color::Red());
 		return 1;
 	}
 	for(size_t i = 0; i < value.length(); i++)
 	{
 		if (!std::isdigit(value[i]))
 		{
-			print::printSLn("It should be a numerical value", color::red);
+			Print::printSLn("It should be a numerical value", Color::Red());
 			return 1;
 		}
 	}
@@ -41,7 +41,7 @@ int Validation::isNumeric(const std::string& value){
 void Validation::validString(const std::string& query, std::string& value){
 	while (true)
 	{
-		print::printS(query, color::gray);
+		Print::printS(query, Color::Gray());
 		std::getline(std::cin, value);
 		if (std::cin.eof())
 			break;
@@ -53,7 +53,7 @@ void Validation::validString(const std::string& query, std::string& value){
 void Validation::validNumeric(const std::string& query, std::string& value){
 	while (true)
 	{
-		print::printS(query, color::gray);
+		Print::printS(query, Color::Gray());
 		std::getline(std::cin, value);
 		if (std::cin.eof())
 			break;
@@ -61,3 +61,5 @@ void Validation::validNumeric(const std::string& query, std::string& value){
 			break;
 	}
 }
+
+

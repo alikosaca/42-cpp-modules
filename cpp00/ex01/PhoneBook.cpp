@@ -26,23 +26,49 @@ void PhoneBook::search()
 		std::cout << "Rehber boş."  << std::endl;
 		return;
 	}
-	print::printSLn("---------------------------------------------", color::orange);
-	print::printS("|", color::orange);
-	print::printS("  Index|  First Name|  Last Name|  Nickname", color::blue);
-	print::printSLn("|", color::orange);
-	print::printSLn("---------------------------------------------", color::orange);
-    for (int i = 0; i < id; ++i)
+	Print::printSLn("---------------------------------------------", Color::Orange());
+	Print::printS("|", Color::Orange());
+	Print::printS("  Index|  First Name|  Last Name|  Nickname", Color::Blue());
+	Print::printSLn("|", Color::Orange());
+	Print::printSLn("---------------------------------------------", Color::Orange());
+    for (int i = 0; i < id; i++)
     {
-		//std::cout << std::setw(6) << color::black <<☺ i << color::resetColor;
-        print::printS("|", color::orange);
+        Print::printS("|", Color::Orange());
 		std::cout << std::setw(7) << i;
-		std::cout << color::blue << std::setw(0) << "|" << color::resetColor;
-		std::cout << std::setw(12) << print::shorten(_contact[i].getFirstName());
-		print::printS("|", color::blue);
-        std::cout << std::setw(11) << print::shorten(_contact[i].getLastName());
-		print::printS("|", color::blue);
-        std::cout << std::setw(10) << print::shorten(_contact[i].getNickName());
-		print::printSLn("|", color::orange);
+		std::cout << Color::Blue() << std::setw(0) << "|" << Color::ResetColor();
+		std::cout << std::setw(12) << Print::shorten(_contact[i].getFirstName());
+		Print::printS("|", Color::Blue());
+        std::cout << std::setw(11) << Print::shorten(_contact[i].getLastName());
+		Print::printS("|", Color::Blue());
+        std::cout << std::setw(10) << Print::shorten(_contact[i].getNickName());
+		Print::printSLn("|", Color::Orange());
 	}			
-	print::printSLn("---------------------------------------------", color::orange);
+	Print::printSLn("---------------------------------------------", Color::Orange());
+	while (true)
+	{
+		std::string value;
+		Validation::validNumeric(": ", value);
+		int inputIndex = std::atoi(value.c_str());
+		
+		if (inputIndex > (id-1))
+			Print::printSLn("Invalid index! Please enter the existing index number in the list!", Color::Red());
+		else
+		{
+			Print::printS("First Name    : ", Color::Blue());
+			Print::printSLn(_contact[inputIndex].getFirstName(), Color::Green());
+
+			print::printS("Last Name     : ", Color::Blue());
+			print::printSLn(_contact[inputIndex].getLastName(), Color::Green());
+
+			Print::printS("Nickname      : ", Color::Blue());
+			Print::printSLn(_contact[inputIndex].getNickName(), Color::Green());
+
+			Print::printS("Phone Number  : ", Color::Blue());
+			Print::printSLn(_contact[inputIndex].getPhoneNumber(), Color::Green());
+
+			Print::printS("Darkest Secret: ", Color::Blue());
+			Print::printSLn(_contact[inputIndex].getDarkestSecret(), Color::Green());
+			break;
+		}
+	}
 }

@@ -1,21 +1,23 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
+#include <cstdlib>
 #include "Contact.hpp"
-#include "print.hpp"
-#include "color.hpp"
+#include "Print.hpp"
+#include "Color.hpp"
+#include "Validation.hpp"
 
-class PhoneBook{
+class PhoneBook
+{
 	private:
-	Contact _contact[8];
-	int index;
-
+		Contact _contact[8];
+		int index;
 	public:
-	PhoneBook();
-	~PhoneBook();
+		PhoneBook();
+		~PhoneBook();
 
-	void add(const std::string& firstName, const std::string& lastName, const std::string& nickName, const std::string& phoneNumber, const std::string& darkestSecret);
-	void search();
+		void add(const std::string& firstName, const std::string& lastName, const std::string& nickName, const std::string& phoneNumber, const std::string& darkestSecret);
+		void search();
 };
 
 #endif
