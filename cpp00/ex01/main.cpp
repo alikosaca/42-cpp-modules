@@ -6,23 +6,18 @@
 int main(void)
 {
 	PhoneBook book;
-	std::string tempName;
-	std::string tempPhone;
 	std::string response;
-
 	std::string firstName;
 	std::string lastName;
 	std::string nickName;
 	std::string phoneNumber;
 	std::string darkestSecret;
-	bool run = true;
 
 	Print::printSLn("<<<--- Welcome! --->>>", Color::Green());
-	while (run)
+	while (true)
 	{
 		Print::printSLn("ADD | SEARCH | EXIT", Color::White());
-		Print::printS("Please select an option: ", Color::Blue());
-		std::getline(std::cin >> std::ws, response);
+		Validation::validString("Please select an option: ", response);
 		if (response == "ADD")
 		{
 			Validation::validString("Name: ", firstName);
@@ -38,9 +33,11 @@ int main(void)
 		}
 		else if (response == "EXIT")
 		{
-			Print::printSLn("Have a nice day. Exit enabled", Color::Green());
+			book.exit();
 			break;
 		}
+		else
+			Print::printSLn("invalid input!", Color::Red());
 	}
 	return 0;
 }

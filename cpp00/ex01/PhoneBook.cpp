@@ -72,3 +72,8 @@ void PhoneBook::search()
 		}
 	}
 }
+
+void PhoneBook::exit()
+{
+	Print::printSLn("Have a nice day. Exit enabled", Color::Green());
+}
