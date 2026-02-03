@@ -3,7 +3,7 @@ NAME = ./a.out
 CPP = c++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC = megaphone.cpp 
+SRC = Megaphone.cpp 
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
