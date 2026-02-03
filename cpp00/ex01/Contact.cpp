@@ -3,7 +3,7 @@
 Contact::Contact(){}
 Contact::~Contact(){}
 
-std::string Contact::GetFirstName() const{
+std::string Contact::getFirstName() const{
     return this->_firstName;
 }
 

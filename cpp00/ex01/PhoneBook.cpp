@@ -57,8 +57,8 @@ void PhoneBook::search()
 			Print::printS("First Name    : ", Color::Blue());
 			Print::printSLn(_contact[inputIndex].getFirstName(), Color::Green());
 
-			print::printS("Last Name     : ", Color::Blue());
-			print::printSLn(_contact[inputIndex].getLastName(), Color::Green());
+			Print::printS("Last Name     : ", Color::Blue());
+			Print::printSLn(_contact[inputIndex].getLastName(), Color::Green());
 
 			Print::printS("Nickname      : ", Color::Blue());
 			Print::printSLn(_contact[inputIndex].getNickName(), Color::Green());
