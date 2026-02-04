@@ -15,8 +15,8 @@ class Validation{
 
 		static int isValidString(const std::string& value);
 		static int isNumeric(const std::string& value);
-		static void validString(const std::string& query, std::string& value);
-		static void validNumeric(const std::string& query, std::string& value);
+		static int validString(const std::string& query, std::string& value);
+		static int validNumeric(const std::string& query, std::string& value);
 };
 
 #endif

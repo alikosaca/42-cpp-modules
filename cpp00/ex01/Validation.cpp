@@ -38,28 +38,32 @@ int Validation::isNumeric(const std::string& value){
 }
 
 
-void Validation::validString(const std::string& query, std::string& value){
+int Validation::validString(const std::string& query, std::string& value){
 	while (true)
 	{
 		Print::printS(query, Color::Gray());
-		std::getline(std::cin, value);
-		if (std::cin.eof())
-			break;
+		if(!std::getline(std::cin, value))
+		{
+			std::cout << std::endl;
+			return 1;
+		}
 		if (!isValidString(value))
 			break;
 	}
+	return 0;
 }
 
-void Validation::validNumeric(const std::string& query, std::string& value){
+int Validation::validNumeric(const std::string& query, std::string& value){
 	while (true)
 	{
 		Print::printS(query, Color::Gray());
-		std::getline(std::cin, value);
-		if (std::cin.eof())
-			break;
+		if(!std::getline(std::cin, value))
+		{
+			std::cout << std::endl;
+			return 1;
+		}
 		if (!isNumeric(value))
 			break;
 	}
+	return 0;
 }
-
-
