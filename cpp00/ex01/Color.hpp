@@ -1,7 +1,6 @@
 #ifndef COLOR_HPP
 # define COLOR_HPP
 
-#include <iostream>
 #include <string>
 
 class Color

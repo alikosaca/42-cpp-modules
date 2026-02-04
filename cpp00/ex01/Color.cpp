@@ -3,8 +3,7 @@
 Color::Color(){}
 Color::~Color(){}
 
-const std::string Color::Green()
-{
+const std::string Color::Green(){
 	return "\e[32m";
 }
 
