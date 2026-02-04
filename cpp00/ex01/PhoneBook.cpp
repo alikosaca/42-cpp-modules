@@ -18,27 +18,27 @@ void PhoneBook::add(const std::string& firstName, const std::string& lastName, c
 	std::cout << "\e[32m" <<  firstName << " Başarıyla eklendi." << std::endl;
 }
 
-void PhoneBook::search()
+int PhoneBook::search()
 {
 	int id = (this->index < 8) ? this->index : 8;
 	if (id == 0)
 	{
-		std::cout << "Rehber boş."  << std::endl;
-		return;
+		std::cout << "PhoneBook are empty."  << std::endl;
+		return 0;
 	}
 	Print::printSLn("---------------------------------------------", Color::Orange());
 	Print::printS("|", Color::Orange());
-	Print::printS("  Index|  First Name|  Last Name|  Nickname", Color::Blue());
+	Print::printS("     Index|First Name| Last Name|  Nickname", Color::Blue());
 	Print::printSLn("|", Color::Orange());
 	Print::printSLn("---------------------------------------------", Color::Orange());
     for (int i = 0; i < id; i++)
     {
         Print::printS("|", Color::Orange());
-		std::cout << std::setw(7) << i;
+		std::cout << std::setw(10) << i;
 		std::cout << Color::Blue() << std::setw(0) << "|" << Color::ResetColor();
-		std::cout << std::setw(12) << Print::shorten(_contact[i].getFirstName());
+		std::cout << std::setw(10) << Print::shorten(_contact[i].getFirstName());
 		Print::printS("|", Color::Blue());
-        std::cout << std::setw(11) << Print::shorten(_contact[i].getLastName());
+        std::cout << std::setw(10) << Print::shorten(_contact[i].getLastName());
 		Print::printS("|", Color::Blue());
         std::cout << std::setw(10) << Print::shorten(_contact[i].getNickName());
 		Print::printSLn("|", Color::Orange());
@@ -47,7 +47,7 @@ void PhoneBook::search()
 	while (true)
 	{
 		std::string value;
-		Validation::validNumeric(": ", value);
+		if (Validation::validNumeric(": ", value)) {return 1;};
 		int inputIndex = std::atoi(value.c_str());
 		
 		if (inputIndex > (id-1))
@@ -71,6 +71,7 @@ void PhoneBook::search()
 			break;
 		}
 	}
+	return 0;
 }
 
 void PhoneBook::exit()
