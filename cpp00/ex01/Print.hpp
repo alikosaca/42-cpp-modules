@@ -7,14 +7,14 @@
 
 class Print{
 	public:
-	Print();
-	~Print();
+		Print();
+		~Print();
 
-	static std::string shorten(const std::string& value);
-	static void printS(const std::string& value, const std::string& color);
-	static void printSLn(const std::string& value, const std::string& color);
-	static void printI(const int& value, const std::string& color);
-	static void printILn(const int& value, const std::string& color);
+		static std::string shorten(const std::string& value);
+		static void printS(const std::string& value, const std::string& color);
+		static void printSLn(const std::string& value, const std::string& color);
+		static void printI(const int& value, const std::string& color);
+		static void printILn(const int& value, const std::string& color);
 };
 
 #endif

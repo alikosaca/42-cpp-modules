@@ -5,8 +5,8 @@ Print::~Print(){}
 
 std::string Print::shorten(const std::string& value)
 {
-	if (value.size() > 5)
-		return value.substr(0, 5) + "...";
+	if (value.length() >= 10)
+		return value.substr(0, 9) + ".";
 	return value;
 }
 
