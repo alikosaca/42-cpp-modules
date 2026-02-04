@@ -10,5 +10,5 @@ int main(void)
         zombies[i].announce();
     }
     delete[] zombies;
-    return (0);
+    return 0;
 }
