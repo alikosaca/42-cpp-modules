@@ -1,4 +1,4 @@
-NAME = ./a.out
+NAME = ./phonebook
 
 CPP = c++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
@@ -9,10 +9,6 @@ OBJ = $(SRC:.cpp=.o)
 all: $(NAME)
 
 %.o: %.cpp
-# 	@echo "----------------------------------------"
-# 	@echo "input: " $<
-# 	@echo "output: " $@
-# 	@echo "----------------------------------------"
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
