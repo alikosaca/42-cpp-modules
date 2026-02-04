@@ -15,5 +15,5 @@ int main(int ac, char *const av[])
 	}
 	else if (ac  == 1)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-	return (0);
+	return 0;
 }
