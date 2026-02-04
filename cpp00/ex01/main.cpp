@@ -2,7 +2,6 @@
 #include "Contact.hpp"
 #include "Validation.hpp"
 
-
 int main(void)
 {
 	PhoneBook book;
@@ -14,25 +13,21 @@ int main(void)
 	std::string darkestSecret;
 
 	Print::printSLn("<<<--- Welcome! --->>>", Color::Green());
-	while (true)
-	{
+	while (true){
 		Print::printSLn("ADD | SEARCH | EXIT", Color::White());
-		Validation::validString("Please select an option: ", response);
-		if (response == "ADD")
-		{
-			Validation::validString("Name: ", firstName);
-			Validation::validString("Last Name: ", lastName);
-			Validation::validString("Nickname: ", nickName);
-			Validation::validNumeric("Phone Number: ", phoneNumber);
-			Validation::validString("Darkset Secret: ", darkestSecret);
+		if (Validation::validString("Please select an option: ", response)) {return (1);}
+		if (response == "ADD"){
+			if (Validation::validString("Name: ", firstName)) {return 1;}
+			if (Validation::validString("Last Name: ", lastName)) {return 1;}
+			if (Validation::validString("Nickname: ", nickName)) {return 1;}
+			if (Validation::validNumeric("Phone Number: ", phoneNumber)) {return 1;}
+			if (Validation::validString("Darkset Secret: ", darkestSecret)) {return 1;}
 			book.add(firstName, lastName, nickName, phoneNumber, darkestSecret);
 		}
-		else if (response == "SEARCH")
-		{
-			book.search();
+		else if (response == "SEARCH"){
+			if (book.search()) {return 1;};
 		}
-		else if (response == "EXIT")
-		{
+		else if (response == "EXIT"){
 			book.exit();
 			break;
 		}
