@@ -1,4 +1,4 @@
-NAME = ./zombie
+NAME = ./zombieHorde
 
 CPP = c++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
