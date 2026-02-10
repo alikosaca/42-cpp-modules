@@ -10,9 +10,9 @@ class Sed{
 		std::string s1;
 		std::string s2;
 	public:
-		Sed(const std::string& fileName, const std::string s1, const std::string s2);
+		Sed(const std::string& fileName, const std::string& s1, const std::string& s2);
 		~Sed();
-	
+
 		void Replace();
 };
 
