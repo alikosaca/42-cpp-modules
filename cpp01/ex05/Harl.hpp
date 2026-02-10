@@ -18,4 +18,5 @@ class Harl{
 };
 
 typedef void (Harl::*HarlMemFn)(void);
+
 #endif
