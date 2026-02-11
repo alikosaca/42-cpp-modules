@@ -1,0 +1,5 @@
+# Object files
+*.o
+
+# Executables
+cpp02/ex00/fixed
