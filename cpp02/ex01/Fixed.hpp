@@ -4,6 +4,7 @@
 
 #include <string>
 #include <iostream>
+#include <cmath>
 
 class Fixed{
 	private:
@@ -11,8 +12,8 @@ class Fixed{
 		static const int bits;
 	public:
 		Fixed();
-		Fixed(const int value);
-		Fixed(const float value);
+		Fixed(const int iValue);
+		Fixed(const float fValue);
 		Fixed(const Fixed& other);
 		Fixed& operator=(const Fixed& other);
 		~Fixed();
@@ -22,5 +23,8 @@ class Fixed{
 		int toInt(void) const;
 		float toFloat(void) const;
 };
+
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
+
 
 #endif
