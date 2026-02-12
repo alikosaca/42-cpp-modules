@@ -1,7 +1,6 @@
 #ifndef FIXED_HPP
 # define FIXED_HPP
 
-
 #include <string>
 #include <iostream>
 #include <cmath>
@@ -22,7 +21,6 @@ class Fixed{
 		void setRawBits(int const raw);
 		int toInt(void) const;
 		float toFloat(void) const;
-
 
 		bool operator>(const Fixed& other) const;
 		bool operator<(const Fixed& other) const;
@@ -48,6 +46,5 @@ class Fixed{
 };
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
-
 
 #endif
