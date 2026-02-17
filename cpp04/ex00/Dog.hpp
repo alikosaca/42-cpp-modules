@@ -10,7 +10,7 @@ class Dog : public Animal{
 		Dog& operator=(const Dog& other);
 		~Dog();
 
-		virtual void makeSound() const;
+		void makeSound() const;
 };
 
 #endif

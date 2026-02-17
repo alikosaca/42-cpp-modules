@@ -65,7 +65,6 @@ Brain::Brain(){
 Brain::Brain(const Brain& other){
 	std::cout << "Brain Copy Constructor called" << std::endl;
 	(*this) = other;
-
 }
 
 Brain& Brain::operator=(const Brain& other) {
