@@ -5,16 +5,16 @@
 #include <string>
 #include <exception>
 
-class Burecaucrat{
+class Bureaucrat{
     private:
         const std::string _name;
         int _grade;
     public:
-        Burecaucrat();
-        Burecaucrat(const std::string name, int grade);
-        Burecaucrat(const Burecaucrat& other);
-        Burecaucrat& operator=(const Burecaucrat& other);
-        ~Burecaucrat();
+        Bureaucrat();
+        Bureaucrat(const std::string name, int grade);
+        Bureaucrat(const Bureaucrat& other);
+        Bureaucrat& operator=(const Bureaucrat& other);
+        ~Bureaucrat();
 
         std::string getName() const;
         int getGrade() const;
@@ -30,6 +30,6 @@ class Burecaucrat{
         };
 };
 
-std::ostream& operator<<(std::ostream &os, const Burecaucrat &br);
+std::ostream& operator<<(std::ostream &os, const Bureaucrat &br);
 
 #endif
