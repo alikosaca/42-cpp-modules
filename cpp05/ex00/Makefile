@@ -1,4 +1,4 @@
-NAME = ./abstract
+NAME = ./bureaucrat
 
 CPP = c++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
