@@ -46,11 +46,11 @@ void Bureaucrat::decrementGrade(){
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw(){
-    return "Grade is too hight. it should be in (1-150)";
+    throw "Grade is too hight. it should be in (1-150)";
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw(){
-    return "Grade is too low. it should be in (1-150)";
+    throw "Grade is too low. it should be in (1-150)";
 }
 
 
