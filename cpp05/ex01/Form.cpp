@@ -1,4 +1,6 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
+
 
 Form::Form() : _name("confidential form"), _isSigned(false), _gradeSign(150), _gradeExecute(150){}
 
