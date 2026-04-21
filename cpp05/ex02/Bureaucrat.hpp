@@ -22,7 +22,7 @@ class Bureaucrat{
         int getGrade() const;
         void incrementGrade();
         void decrementGrade();
-        void signForm(Form &f) const;
+        void signForm(AForm &f) const;
 
         class GradeTooHighException : public std::exception{
             public:
