@@ -37,7 +37,7 @@ void AForm::beSigned(const Bureaucrat &b){
         throw AForm::GradeTooLowException();
     }
     else if (_isSigned){
-        throw AForm::SigningTheSameForm();
+        throw AForm::SigningTheSameFormException();
     }
     else{
         this->_isSigned = true;
