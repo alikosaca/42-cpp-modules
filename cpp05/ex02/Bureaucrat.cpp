@@ -28,6 +28,15 @@ std::string Bureaucrat::getName() const{ return(this->_name); };
 
 int Bureaucrat::getGrade() const{ return(this->_grade); }
 
+void Bureaucrat::executeForm(AForm const &form) const{
+    try{
+        form.execute(*this);
+        std::cout << this->_name << " executed " << form.getName() << " form." << std::endl;
+    } catch(std::exception &e){
+        std::cout << "Ups! " << this->_name << " coudn't execute " << form.getName() << " form :/ because: " << e.what() << std::endl;
+    }
+}
+
 void Bureaucrat::incrementGrade(){
     if (this->_grade == 1){
         throw Bureaucrat::GradeTooHighException();
