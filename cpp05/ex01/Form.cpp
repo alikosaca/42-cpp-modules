@@ -36,6 +36,9 @@ void Form::beSigned(const Bureaucrat &b){
     if (b.getGrade() > _gradeSign){
         throw Form::GradeTooLowException();
     }
+    else if (_isSigned){
+        throw Form::SigningTheSameForm();
+    }
     else{
         this->_isSigned = true;
     }
@@ -47,6 +50,10 @@ const char* Form::GradeTooHighException::what() const throw(){
 
 const char* Form::GradeTooLowException::what() const throw(){
     return "grade To low, unauthorized access!";
+}
+
+const char* Form::SigningTheSameForm::what() const throw(){
+    return "This form has been signed before!";
 }
 
 std::ostream& operator<<(std::ostream &os, const Form &f){

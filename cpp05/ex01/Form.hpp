@@ -34,6 +34,9 @@ class Form{
         class GradeTooLowException : public std::exception{
             const char* what() const throw();
         };
+        class SigningTheSameForm : public std::exception{
+            const char* what() const throw();
+        };
 };
 
 std::ostream& operator<<(std::ostream &os, const Form &f);
