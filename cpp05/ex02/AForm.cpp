@@ -66,12 +66,16 @@ const char* AForm::GradeTooLowException::what() const throw(){
     return "grade To low, unauthorized access!";
 }
 
-const char* AForm::SigningTheSameForm::what() const throw(){
+const char* AForm::SigningTheSameFormException::what() const throw(){
     return "This form has been signed before!";
 }
 
 const char* AForm::FormNotSignedException::what() const throw(){
     return "Form not signed! Sign the form and try again.";
+}
+
+const char* AForm::FileNotOpenException::what() const throw(){
+    return "The file could not be opened.";
 }
 
 std::ostream& operator<<(std::ostream &os, const AForm &f){

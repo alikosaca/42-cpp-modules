@@ -37,10 +37,13 @@ class AForm{
         class GradeTooLowException : public std::exception{
             const char* what() const throw();
         };
-        class SigningTheSameForm : public std::exception{
+        class SigningTheSameFormException : public std::exception{
             const char* what() const throw();
         };
         class FormNotSignedException : public std::exception {
+            virtual const char* what() const throw();
+        };
+        class FileNotOpenException : public std::exception {
             virtual const char* what() const throw();
         };
 };
