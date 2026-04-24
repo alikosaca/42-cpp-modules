@@ -41,6 +41,20 @@ void AForm::beSigned(const Bureaucrat &b){
     }
 }
 
+void AForm::execute(Bureaucrat const &executor) const{
+    if (_isSigned && executor.getGrade() < this->_gradeExecute){
+        action(executor);
+    }
+    else{
+        if (!_isSigned){
+            // throw
+        }
+        if (executor.getGrade() > this->_gradeExecute){
+            // throw
+        }
+    }
+}
+
 const char* AForm::GradeTooHighException::what() const throw(){
     return "grade to hight, unauthorized access!";
 }
