@@ -36,6 +36,9 @@ void AForm::beSigned(const Bureaucrat &b){
     if (b.getGrade() > _gradeSign){
         throw AForm::GradeTooLowException();
     }
+    else if (_isSigned){
+        throw AForm::SigningTheSameForm();
+    }
     else{
         this->_isSigned = true;
     }
@@ -47,10 +50,10 @@ void AForm::execute(Bureaucrat const &executor) const{
     }
     else{
         if (!_isSigned){
-            // throw
+            throw FormNotSignedException();
         }
         if (executor.getGrade() > this->_gradeExecute){
-            // throw
+            throw GradeTooLowException();
         }
     }
 }
@@ -61,6 +64,14 @@ const char* AForm::GradeTooHighException::what() const throw(){
 
 const char* AForm::GradeTooLowException::what() const throw(){
     return "grade To low, unauthorized access!";
+}
+
+const char* AForm::SigningTheSameForm::what() const throw(){
+    return "This form has been signed before!";
+}
+
+const char* AForm::FormNotSignedException::what() const throw(){
+    return "Form not signed! Sign the form and try again.";
 }
 
 std::ostream& operator<<(std::ostream &os, const AForm &f){
