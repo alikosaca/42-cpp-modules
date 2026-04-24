@@ -46,7 +46,7 @@ void AForm::beSigned(const Bureaucrat &b){
 
 void AForm::execute(Bureaucrat const &executor) const{
     if (_isSigned && executor.getGrade() < this->_gradeExecute){
-        action(executor);
+        action();
     }
     else{
         if (!_isSigned){
