@@ -3,11 +3,11 @@
 #include <fstream>
 
 
-PresidentialPardonForm::PresidentialPardonForm() : _target("PresidentialPardonForm"), AForm("PresidentialPardonForm", false, 25, 5){}
+PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", false, 25, 5), _target("PresidentialPardonForm"){}
 
-PresidentialPardonForm::PresidentialPardonForm(std::string &target) : _target(target), AForm("PresidentialPardonForm", false, 25, 5){}
+PresidentialPardonForm::PresidentialPardonForm(std::string &target) : AForm("PresidentialPardonForm", false, 25, 5), _target(target){}
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other) : _target("PresidentialPardonForm"), AForm(other){}
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other) : AForm(other), _target("PresidentialPardonForm"){}
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& other){
 	if (this != &other){
