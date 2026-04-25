@@ -3,7 +3,7 @@ NAME = ./form
 CPP = c++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC = main.cpp Bureaucrat.cpp AForm.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
