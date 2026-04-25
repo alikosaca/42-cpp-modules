@@ -3,11 +3,11 @@
 #include <fstream>
 
 
-ShrubberyCreationForm::ShrubberyCreationForm() : _target("ShrubberyCreationForm"), AForm("ShrubberyCreationForm", false, 145, 137){}
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", false, 145, 137), _target("ShrubberyCreationForm"){}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : _target(target), AForm("ShrubberyCreationForm", false, 145, 137){}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm("ShrubberyCreationForm", false, 145, 137), _target(target){}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) : _target("ShrubberyCreationForm"), AForm(other){}
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) : AForm(other), _target("ShrubberyCreationForm"){}
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other){
 	if (this != &other){
