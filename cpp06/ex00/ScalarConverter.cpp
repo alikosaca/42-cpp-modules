@@ -58,7 +58,7 @@ static void castChar(const double cast){
 
 }
 
-static void castInt(double cast){
+static void castInt(const double cast){
     std::cout << "int: ";
     if (cast < std::numeric_limits<int>::min() || cast > std::numeric_limits<int>::max()){
         std::cout << "impossible" << std::endl;
