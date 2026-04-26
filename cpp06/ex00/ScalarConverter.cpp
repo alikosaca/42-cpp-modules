@@ -35,29 +35,45 @@ static bool pseudoLiterals(const std::string &literal){
     }
 }
 
-static bool convertType(const std::string &literal){
+
+static void castChar(const double cast){
+    std::cout << "char: ";
+    if (cast < 0.0 && cast > 127.0){
+        std::cout << "impossible" << std::endl;
+        return;
+    }
+    char c = static_cast<char>(cast);
+    if (std::isprint(c)) {
+        std::cout << "'" << c << "'" << std::endl;
+    } else {
+        std::cout << "Non displayable" << std::endl;
+    }
+
+}
+static void convertType(const std::string &literal){
     char* end;
-    double val = std::strtod(literal.c_str(), &end);
+    double cast = std::strtod(literal.c_str(), &end);
     
     if (literal.length() == 1 && !isdigit(literal[0])) {
         double val = static_cast<double>(literal[0]);
-        return true;
+        return;
     } else if ((*end != '\0' && !(*end == 'f' && *(end + 1) == '\0')) || (end == literal.c_str())) {
         std::cout << "char: impossible" << std::endl;
         std::cout << "int: impossible" << std::endl;
         std::cout << "float: impossible" << std::endl;
         std::cout << "double: impossible" << std::endl;
-        return false;
-    } else{
-        return true;
+        return;
     }
+
+    castChar(cast);
+
+
 }
+
 
 void ScalarConverter::Convert(const std::string &literal){
     if (!pseudoLiterals(literal)){
         return;
     }
-    if (!convertType(literal)){
-        return;
-    }
+    convertType(literal);
 }
