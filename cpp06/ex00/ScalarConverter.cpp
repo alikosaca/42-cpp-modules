@@ -1,5 +1,12 @@
 #include "ScalarConverter.hpp"
 
+#include <cctype>
+#include <cmath>
+#include <cstdlib>
+#include <iostream>
+#include <limits>
+
+
 ScalarConverter::ScalarConverter(){}
 
 ScalarConverter::ScalarConverter(const ScalarConverter& other){
@@ -50,6 +57,17 @@ static void castChar(const double cast){
     }
 
 }
+
+static void castInt(double cast){
+    std::cout << "int: ";
+    if (cast < std::numeric_limits<int>::min() || cast > std::numeric_limits<int>::max()){
+        std::cout << "impossible" << std::endl;
+        return;
+    }
+    int i = static_cast<int>(cast);
+    std::cout << cast << std::endl;
+}
+
 static void convertType(const std::string &literal){
     char* end;
     double cast = std::strtod(literal.c_str(), &end);
@@ -66,6 +84,7 @@ static void convertType(const std::string &literal){
     }
 
     castChar(cast);
+    castInt(cast);
 
 
 }
