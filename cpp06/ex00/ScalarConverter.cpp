@@ -68,7 +68,7 @@ static void castInt(double cast){
     std::cout << cast << std::endl;
 }
 
-static void castFloat(const double cast){
+static void castDouble(const double cast){
     std::cout << "double: ";
     if (cast == std::floor(cast)) {
         std::cout << cast << ".0" << std::endl;
@@ -94,8 +94,7 @@ static void convertType(const std::string &literal){
 
     castChar(cast);
     castInt(cast);
-    castFloat(cast);
-
+    castDouble(cast);
 }
 
 
