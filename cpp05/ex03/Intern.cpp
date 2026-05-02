@@ -35,7 +35,6 @@ AForm* Intern::createPresidentialPardonForm(const std::string& target) const{
     return new PresidentialPardonForm(target);
 }
 
-
 AForm* Intern::makeForm(const std::string& formName, const std::string& target) const {
     std::string formTable[] = {
         "shrubbery creation",
@@ -53,10 +52,12 @@ AForm* Intern::makeForm(const std::string& formName, const std::string& target) 
 	while (i < 3 && formName != formTable[i]){
 		i++;
 	}
+
 	if (i < 3 && formName == formTable[i]){
 		std::cout << "Intern creates " << formName << std::endl;
         return (this->*formCreators[i])(target);
 	} else{
-		throw "Ups! This is not the name of the form that the intern can sign. Form Name: " + formName;
+		throw "Ups! This is not the name of the form that the intern can sign. Form Name: " + formName;        
 	}
+    return (NULL);
 }

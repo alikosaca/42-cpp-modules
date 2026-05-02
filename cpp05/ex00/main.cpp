@@ -37,6 +37,5 @@ int main(void){
     } catch(std::exception &e){
         std::cout << "exception test 4 -> " << e.what() << std::endl;
     }
-
     return (0);
 }

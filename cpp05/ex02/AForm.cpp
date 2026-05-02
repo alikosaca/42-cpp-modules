@@ -44,7 +44,7 @@ void AForm::beSigned(const Bureaucrat &b){
     }
 }
 
-void AForm::execute(Bureaucrat const &executor) const{
+void AForm::execute(const Bureaucrat &executor) const{
     if (_isSigned && executor.getGrade() < this->_gradeExecute){
         action();
     }

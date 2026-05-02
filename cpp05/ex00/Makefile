@@ -8,8 +8,8 @@ OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-%.o: %.cpp
-	$(CPP) $(CPPFLAGS) -c $< -o $@
+# %.o: %.cpp
+# 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
 	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)

@@ -6,7 +6,7 @@
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", false, 72, 45), _target("RobotomyRequestForm"){}
 
-RobotomyRequestForm::RobotomyRequestForm(std::string &target) : AForm("RobotomyRequestForm", false, 72, 45), _target(target){}
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("RobotomyRequestForm", false, 72, 45), _target(target){}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) : AForm(other), _target("RobotomyRequestForm"){}
 

@@ -11,21 +11,74 @@
 #include <ctime>
 
 int main(void){
-    std::srand(static_cast<unsigned int>(std::time(NULL)));
-
+    std::srand(std::time(NULL));
 
     try{
-        std::cout << "a" << std::endl;
-        Bureaucrat a("Norminette", 42);
-        std::cout << "f" << std::endl;
-        ShrubberyCreationForm f("Home");
-    
-        std::cout << a << std::endl;
-        std::cout << "a yazdık" << std::endl;
-        std::cout << f << std::endl;
-        std::cout << "f yazdık" << std::endl;
+        std::cout << "----------------" << std::endl;
+        std::cout << "<- | TEST 1 | ->" << std::endl;
+        Bureaucrat norm("Norminette", 42);
+        ShrubberyCreationForm form("Home");
+        std::cout << norm << std::endl;
+        std::cout << form << std::endl;
+
+        norm.signForm(form);
+        norm.executeForm(form);
     } catch(std::exception &e){
-        std::cout << "sorun var: " << e.what() << std::endl;
+        std::cout << "ups!: " << e.what() << std::endl;
+    }
+    try{
+        std::cout << "----------------" << std::endl;
+        std::cout << "<- | TEST 2 | ->" << std::endl;
+        Bureaucrat norm("Norminette", 1);
+        RobotomyRequestForm form("Home");
+        std::cout << norm << std::endl;
+        std::cout << form << std::endl;
+
+        norm.signForm(form);
+        norm.signForm(form);
+        norm.executeForm(form);
+    } catch(std::exception &e){
+        std::cout << "ups!: " << e.what() << std::endl;
+    }
+    try{
+        std::cout << "----------------" << std::endl;
+        std::cout << "<- | TEST 3 | ->" << std::endl;
+        Bureaucrat norm("Norminette", 1);
+        PresidentialPardonForm form("Home");
+        std::cout << norm << std::endl;
+        std::cout << form << std::endl;
+
+        norm.executeForm(form);
+        norm.signForm(form);
+        norm.executeForm(form);
+    } catch(std::exception &e){
+        std::cout << "ups!: " << e.what() << std::endl;
+    }
+    try{
+        std::cout << "----------------" << std::endl;
+        std::cout << "<- | TEST 4 | ->" << std::endl;
+        Bureaucrat norm("Norminette", 30);
+        PresidentialPardonForm form("Home");
+        std::cout << norm << std::endl;
+        std::cout << form << std::endl;
+
+        norm.signForm(form);
+        norm.executeForm(form);
+    } catch(std::exception &e){
+        std::cout << "ups!: " << e.what() << std::endl;
+    }
+    try{
+        std::cout << "----------------" << std::endl;
+        std::cout << "<- | TEST 5 | ->" << std::endl;
+        Bureaucrat norm("Norminette", 50);
+        RobotomyRequestForm form("Home");
+        std::cout << norm << std::endl;
+        std::cout << form << std::endl;
+
+        norm.signForm(form);
+        norm.executeForm(form);
+    } catch(std::exception &e){
+        std::cout << "ups!: " << e.what() << std::endl;
     }
     return (0);
 }

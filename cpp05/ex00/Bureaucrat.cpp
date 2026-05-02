@@ -2,7 +2,6 @@
 
 Bureaucrat::Bureaucrat() : _name("anonymous"), _grade(150){}
 
-
 Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name), _grade(grade){
     if (grade < 1){
         throw Bureaucrat::GradeTooLowException();
@@ -45,7 +44,7 @@ void Bureaucrat::decrementGrade(){
     }
 }
 
-const char* Bureaucrat::GradeTooHighException::what() const throw(){
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
     return "Grade is too hight. it should be in (1-150)";
 }
 

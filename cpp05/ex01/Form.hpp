@@ -29,16 +29,18 @@ class Form{
 
         class GradeTooHighException : public std::exception{
             public:
-                const char* what() const throw();
+                virtual const char* what() const throw();
         };
         class GradeTooLowException : public std::exception{
-            const char* what() const throw();
+            public:
+                virtual const char* what() const throw();
         };
         class SigningTheSameForm : public std::exception{
-            const char* what() const throw();
+            public:
+                virtual const char* what() const throw();
         };
 };
-
+        
 std::ostream& operator<<(std::ostream &os, const Form &f);
-
+        
 #endif
