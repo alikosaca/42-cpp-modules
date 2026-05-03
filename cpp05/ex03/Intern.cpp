@@ -2,6 +2,7 @@
 
 #include <string>
 #include <exception>
+#include <stdexcept>
 
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -57,7 +58,11 @@ AForm* Intern::makeForm(const std::string& formName, const std::string& target) 
 		std::cout << "Intern creates " << formName << std::endl;
         return (this->*formCreators[i])(target);
 	} else{
-		throw "Ups! This is not the name of the form that the intern can sign. Form Name: " + formName;        
+		throw FormNotFoundException();
 	}
     return (NULL);
+}
+
+const char* Intern::FormNotFoundException::what() const throw(){
+    return "Intern Exception: Form name is invalid or does not exist!";
 }
