@@ -20,7 +20,6 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other){
 
 ScalarConverter::~ScalarConverter(){}
 
-
 static bool pseudoLiterals(const std::string &literal){
     std::string pseudoLiterals[6] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"};
     int i = 0;
@@ -95,8 +94,8 @@ static void convertType(const std::string &literal){
     char* end;
     double cast;
     
-    if (literal.length() == 1 && !isdigit(literal[0])) {
-        cast = static_cast<double>(literal[0]);    
+    if (literal.length() == 1 && !isdigit(literal[0])){
+        cast = static_cast<double>(literal[0]);
     } else{
         cast = std::strtod(literal.c_str(), &end);
         if ((*end != '\0' && !(*end == 'f' && *(end + 1) == '\0')) || (end == literal.c_str())) {
@@ -107,7 +106,6 @@ static void convertType(const std::string &literal){
             return;
         }
     }
-
     castChar(cast);
     castInt(cast);
     castFloat(cast);
