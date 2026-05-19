@@ -69,7 +69,7 @@ static void castInt(const double cast){
         return;
     }
     int i = static_cast<int>(cast);
-    std::cout << cast << std::endl;
+    std::cout << i << std::endl;
 }
 
 static void castDouble(const double cast){
