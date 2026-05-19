@@ -25,21 +25,25 @@ static bool pseudoLiterals(const std::string &literal){
     std::string pseudoLiterals[6] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"};
     int i = 0;
 
-    while (i < pseudoLiterals->length() && literal != pseudoLiterals[i]){
+    while (i < 6 && literal != pseudoLiterals[i]){
         i++;
     }
-    if (i < pseudoLiterals->length() && literal == pseudoLiterals[i]){
-            std::cout << "char: impossible" << std::endl;
-            std::cout << "int: impossible" << std::endl;
+    if (i < 6 && literal == pseudoLiterals[i]){
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
     	if (literal == "nan" || literal == "nanf"){
             std::cout << "float: nanf" << std::endl;
             std::cout << "double: nan" << std::endl;
-        }else if (literal == "+inf" || literal == "+inff"){
+        } else if (literal == "+inf" || literal == "+inff" || literal == "inf" || literal == "inff"){
             std::cout << "float: inff" << std::endl;
             std::cout << "double: inf" << std::endl;
+        } else if (literal == "-inf" || literal == "-inff"){
+            std::cout << "float: -inff" << std::endl;
+            std::cout << "double: -inf" << std::endl;
         }
         return true;
     }
+    return false;
 }
 
 
@@ -89,17 +93,19 @@ static void castFloat(const double cast){
 
 static void convertType(const std::string &literal){
     char* end;
-    double cast = std::strtod(literal.c_str(), &end);
+    double cast;
     
     if (literal.length() == 1 && !isdigit(literal[0])) {
-        double val = static_cast<double>(literal[0]);
-        return;
-    } else if ((*end != '\0' && !(*end == 'f' && *(end + 1) == '\0')) || (end == literal.c_str())) {
-        std::cout << "char: impossible" << std::endl;
-        std::cout << "int: impossible" << std::endl;
-        std::cout << "float: impossible" << std::endl;
-        std::cout << "double: impossible" << std::endl;
-        return;
+        cast = static_cast<double>(literal[0]);    
+    } else{
+        cast = std::strtod(literal.c_str(), &end);
+        if ((*end != '\0' && !(*end == 'f' && *(end + 1) == '\0')) || (end == literal.c_str())) {
+            std::cout << "char: impossible" << std::endl;
+            std::cout << "int: impossible" << std::endl;
+            std::cout << "float: impossible" << std::endl;
+            std::cout << "double: impossible" << std::endl;
+            return;
+        }
     }
 
     castChar(cast);
@@ -110,7 +116,7 @@ static void convertType(const std::string &literal){
 
 
 void ScalarConverter::Convert(const std::string &literal){
-    if (!pseudoLiterals(literal)){
+    if (pseudoLiterals(literal)){
         return;
     }
     convertType(literal);
