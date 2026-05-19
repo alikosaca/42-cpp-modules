@@ -49,7 +49,7 @@ static bool pseudoLiterals(const std::string &literal){
 
 static void castChar(const double cast){
     std::cout << "char: ";
-    if (cast < 0.0 && cast > 127.0){
+    if (cast < 0.0 || cast > 127.0){
         std::cout << "impossible" << std::endl;
         return;
     }
