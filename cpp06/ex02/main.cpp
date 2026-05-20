@@ -9,7 +9,7 @@
 #include <iostream>
 
 Base* generate(void){
-    int random = std::rand();
+    int random = std::rand() % 3;
 
     if (random % 2 == 0){
         return (new A());
@@ -55,6 +55,16 @@ void identify(Base& p) {
 
 int main(void)
 {
-    std::srand(static_cast<unsigned int>(std::time(NULL)));
+    std::srand(static_cast<unsigned int>(std::time(NULL)));    
+    for (std::size_t i = 0; i < 5; i++) {
+        std::cout << "<<<---Test " << (i + 1) << "--->" << std::endl;
+        Base* randomBase = generate();
+        std::cout << "identify(*)" << std::endl;
+        identify(randomBase);
+        std::cout << "identify(&)" << std::endl;
+        identify((*randomBase));
+        std::cout << "<<<--->>>" << std::endl;
+        delete randomBase;
+    }
     return (0);
 }
