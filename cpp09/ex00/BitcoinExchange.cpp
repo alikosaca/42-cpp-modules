@@ -7,7 +7,11 @@
 //#include <exception>
 
 
-std::string BitcoinExchange::DateIsValid(std::string date){   
+std::string BitcoinExchange::DateIsValid(std::string line){   
+    if (line.length() < 14){
+        throw "bad input => "+ line;
+    }
+    std::string date = line.substr(0, 13);
     if (date[4] != '-' || date[7] != '-' || date[11] != '|'){
         throw "bad input";
     } //line.length() > 14 ||
@@ -83,11 +87,13 @@ void BitcoinExchange::processInput(std::string input){
     std::getline(file, line);
     while (std::getline(file, line)){
         try{
-            date = DateIsValid(line.substr(0, 13));
+            date = DateIsValid(line);
             value = ValueIsValid(line.substr(13));
             Exchange(date, value);
+        }catch (const std::string& e) {
+            std::cout << "Error: " << e << std::endl;
         }catch(const char* e){
-            std::cout << "err: " << e << std::endl;
+            std::cout << "Error: " << e << std::endl;
         }
     }
     file.close();
