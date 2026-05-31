@@ -9,10 +9,10 @@ class BitcoinExchange {
     private:
         std::map<std::string, float> data;
     public:
-        //BitcoinExchange();
-        //BitcoinExchange(const BitcoinExchange& other);
-        //BitcoinExchange& operator=(const BitcoinExchange& other);
-        //~BitcoinExchange();
+        BitcoinExchange();
+        BitcoinExchange(const BitcoinExchange& other);
+        BitcoinExchange& operator=(const BitcoinExchange& other);
+        ~BitcoinExchange();
 
         void processInput(std::string Input);
         void InitDatabase();

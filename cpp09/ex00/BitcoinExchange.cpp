@@ -4,8 +4,16 @@
 #include <fstream>
 #include <cstdlib>
 #include <map>
-//#include <exception>
 
+BitcoinExchange::BitcoinExchange(){}
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) : data(other.data){}
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other){
+    if (this != &other){
+        data = other.data;
+    }
+    return *this;
+}
+BitcoinExchange::~BitcoinExchange(){}
 
 std::string BitcoinExchange::DateIsValid(std::string line){   
     if (line.length() < 14){
@@ -14,16 +22,11 @@ std::string BitcoinExchange::DateIsValid(std::string line){
     std::string date = line.substr(0, 13);
     if (date[4] != '-' || date[7] != '-' || date[11] != '|'){
         throw "bad input";
-    } //line.length() > 14 ||
-    //! tarih kontorlü yap
+    }
     //? input.txt en altta boşluk olabilir mi?
     if (date[10] != ' ' || date[11] != '|' || date[12] != ' '){
         throw "bad input2";
     }
-    //std::string y = line.substr(0, 4).c_str();
-    //std::string m = line.substr(5, 2).c_str();
-    //std::string d = line.substr(8, 2).c_str();
-    //std::cout << "year:" << y << ", month:" << m << ", day:" << d << std::endl;
     int year = std::atoi(date.substr(0, 4).c_str());
     int month = std::atoi(date.substr(5, 2).c_str());
     int day = std::atoi(date.substr(8, 2).c_str());
