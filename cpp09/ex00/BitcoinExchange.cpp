@@ -34,8 +34,10 @@ float BitcoinExchange::ValueIsValid(std::string valueS){
        throw "incorrect value! must between 0 and 1000 number";
     }
     float value = std::atof(valueS.c_str());
-    if (value > 1000 || value < 0){
+    if (value > 1000){
        throw "value must between 0 and 1000";
+    } else if (value < 0){
+        throw "not a positive number.";
     }
     return value;
 }
