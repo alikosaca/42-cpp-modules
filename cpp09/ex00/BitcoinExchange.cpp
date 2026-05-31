@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <map>
 //#include <exception>
 
 
@@ -37,8 +38,28 @@ void BitcoinExchange::ValueIsValid(std::string valueS){
     }
 }
 
+void BitcoinExchange::InitDatabase(){
+    std::ifstream database("data.csv");
+    if (!database.is_open()){
+        throw "data.csv coudnt open!";
+    }
+    std::string line;
+    std::getline(database, line);
+    while (std::getline(database, line)){
+        if (line.size() >= 12){
+            this->data[line.substr(0, 10)] = std::atof(line.substr(11).c_str());;
+        }
+    }
+    database.close();
+}
 
-void BitcoinExchange::processInput(std::string input){
+void BitcoinExchange::processInput(std::string input){    
+    try{
+        InitDatabase();
+    } catch(const char* e){
+        std::cout << "ERR! Database" << e << std::endl;
+        return;
+    }
     std::ifstream file(input.c_str());
     if (!file.is_open()){
         throw "Input.txt coudnt open";
@@ -50,6 +71,7 @@ void BitcoinExchange::processInput(std::string input){
         try{
             DateIsValid(line.substr(0, 13));
             ValueIsValid(line.substr(13));
+
         }catch(const char* e){
             std::cout << "err: " << e << std::endl;
         }

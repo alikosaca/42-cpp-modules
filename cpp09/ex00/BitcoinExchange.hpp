@@ -3,11 +3,13 @@
 
 #include <iostream>
 #include <string>
+#include <map>
 
 class BitcoinExchange {
     private:
         float price;
-        int date;
+        std::string date;
+        std::map<std::string, float> data;
         int month;
         int year;
     public:
@@ -17,6 +19,7 @@ class BitcoinExchange {
         //~BitcoinExchange();
 
         void processInput(std::string Input);
+        void InitDatabase();
         void DateIsValid(std::string date);
         void ValueIsValid(std::string valueS);
 };
