@@ -39,7 +39,7 @@ float BitcoinExchange::ValueIsValid(std::string valueS){
     }
     float value = std::atof(valueS.c_str());
     if (value > 1000){
-       throw "value must between 0 and 1000";
+       throw "too large a number.";
     } else if (value < 0){
         throw "not a positive number.";
     }
@@ -49,7 +49,7 @@ float BitcoinExchange::ValueIsValid(std::string valueS){
 void BitcoinExchange::InitDatabase(){
     std::ifstream database("data.csv");
     if (!database.is_open()){
-        throw "data.csv coudnt open!";
+        throw "data.csv could not open file";
     }
     std::string line;
     std::getline(database, line);
@@ -74,12 +74,12 @@ void BitcoinExchange::processInput(std::string input){
     try{
         InitDatabase();
     } catch(const char* e){
-        std::cout << "ERR! Database" << e << std::endl;
+        std::cout << "Error: " << e << std::endl;
         return;
     }
     std::ifstream file(input.c_str());
     if (!file.is_open()){
-        throw "Input.txt coudnt open";
+        throw "could not open file.";
     }
     std::string line;
     std::string date;
