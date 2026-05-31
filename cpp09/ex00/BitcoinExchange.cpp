@@ -21,17 +21,17 @@ std::string BitcoinExchange::DateIsValid(std::string line){
     }
     std::string date = line.substr(0, 13);
     if (date[4] != '-' || date[7] != '-' || date[11] != '|'){
-        throw "bad input";
+        throw "file in invalid format";
     }
     //? input.txt en altta boşluk olabilir mi?
     if (date[10] != ' ' || date[11] != '|' || date[12] != ' '){
-        throw "bad input2";
+        throw "file in invalid format";
     }
     int year = std::atoi(date.substr(0, 4).c_str());
     int month = std::atoi(date.substr(5, 2).c_str());
     int day = std::atoi(date.substr(8, 2).c_str());
     if (year < 999 || (month > 12 || month < 0) || (day > 31 || day < 0)){
-        throw "date err";
+        throw "Invalid date information.";
     }
     return date;
 }
