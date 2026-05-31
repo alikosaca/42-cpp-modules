@@ -17,8 +17,8 @@ class BitcoinExchange {
         //~BitcoinExchange();
 
         void processInput(std::string Input);
-        //void InputIsValid(); //hata kontrolleri
-        //void Isnegative();
+        void DateIsValid(std::string date);
+        void ValueIsValid(std::string valueS);
 };
 
 #endif 
