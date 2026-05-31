@@ -7,11 +7,7 @@
 
 class BitcoinExchange {
     private:
-        float price;
-        std::string date;
         std::map<std::string, float> data;
-        int month;
-        int year;
     public:
         //BitcoinExchange();
         //BitcoinExchange(const BitcoinExchange& other);
@@ -20,8 +16,9 @@ class BitcoinExchange {
 
         void processInput(std::string Input);
         void InitDatabase();
-        void DateIsValid(std::string date);
-        void ValueIsValid(std::string valueS);
+        std::string DateIsValid(std::string date);
+        float ValueIsValid(std::string valueS);
+        //void InitInput();
 };
 
 #endif 
