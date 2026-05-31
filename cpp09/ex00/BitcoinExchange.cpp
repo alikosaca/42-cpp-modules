@@ -33,7 +33,7 @@ float BitcoinExchange::ValueIsValid(std::string valueS){
     if (valueS.length() > 4 || valueS.length() == 0){
        throw "incorrect value! must between 0 and 1000 number";
     }
-    float value = std::atoi(valueS.c_str());
+    float value = std::atof(valueS.c_str());
     if (value > 1000 || value < 0){
        throw "value must between 0 and 1000";
     }
@@ -55,9 +55,14 @@ void BitcoinExchange::InitDatabase(){
     database.close();
 }
 
-// void BitcoinExchange::InitInput(){
-
-// }
+void BitcoinExchange::Exchange(std::string& date, float& value){
+    std::map<std::string, float>::iterator it = this->data.lower_bound(date);
+    if (it->first != date && it != this->data.begin()){
+        --it;
+    }
+    float res = value * it->second;
+    std::cout << date << " => " << value << " = " << res << std::endl;
+}
 
 void BitcoinExchange::processInput(std::string input){    
     try{
@@ -71,13 +76,14 @@ void BitcoinExchange::processInput(std::string input){
         throw "Input.txt coudnt open";
     }
     std::string line;
+    std::string date;
+    float value;
     std::getline(file, line);
     while (std::getline(file, line)){
-        std::cout << line << std::endl;
         try{
-            std::string date = DateIsValid(line.substr(0, 13));
-            float value = ValueIsValid(line.substr(13));
-
+            date = DateIsValid(line.substr(0, 13));
+            value = ValueIsValid(line.substr(13));
+            Exchange(date, value);
         }catch(const char* e){
             std::cout << "err: " << e << std::endl;
         }

@@ -18,7 +18,7 @@ class BitcoinExchange {
         void InitDatabase();
         std::string DateIsValid(std::string date);
         float ValueIsValid(std::string valueS);
-        //void InitInput();
+        void Exchange(std::string& date, float& value);
 };
 
 #endif 
