@@ -11,9 +11,9 @@
 Base* generate(void){
     int random = std::rand() % 3;
 
-    if (random % 2 == 0){
+    if (random == 0){
         return (new A());
-    } else if (random % 3 == 0){
+    } else if (random == 1){
         return (new B());
     } else{
         return (new C());
