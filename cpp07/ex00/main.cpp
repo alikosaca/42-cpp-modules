@@ -8,7 +8,7 @@ int main(void) {
     int b = 3;
 
     std::cout << "a = " << a << ", ";
-    std::cout << "b = " << std::endl;
+    std::cout << "b = " << b << std::endl;
     ::swap(a, b);
     std::cout << "a = " << a << ", ";
     std::cout << "b = " << b << std::endl;
