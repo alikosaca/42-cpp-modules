@@ -1,9 +1,9 @@
-NAME = ./bureaucrat
+NAME = ./mydynamic
 
 CPP = c++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC = Main.cpp Base.cpp
+SRC = main.cpp Base.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
