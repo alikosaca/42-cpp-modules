@@ -6,7 +6,6 @@
 #include <iostream>
 #include <limits>
 
-
 ScalarConverter::ScalarConverter(){}
 
 ScalarConverter::ScalarConverter(const ScalarConverter& other){
@@ -34,8 +33,8 @@ static bool pseudoLiterals(const std::string &literal){
             std::cout << "float: nanf" << std::endl;
             std::cout << "double: nan" << std::endl;
         } else if (literal == "+inf" || literal == "+inff" || literal == "inf" || literal == "inff"){
-            std::cout << "float: inff" << std::endl;
-            std::cout << "double: inf" << std::endl;
+            std::cout << "float: +inff" << std::endl;
+            std::cout << "double: +inf" << std::endl;
         } else if (literal == "-inf" || literal == "-inff"){
             std::cout << "float: -inff" << std::endl;
             std::cout << "double: -inf" << std::endl;
@@ -44,7 +43,6 @@ static bool pseudoLiterals(const std::string &literal){
     }
     return false;
 }
-
 
 static void castChar(const double cast){
     std::cout << "char: ";
@@ -73,7 +71,7 @@ static void castInt(const double cast){
 
 static void castDouble(const double cast){
     std::cout << "double: ";
-    if (cast == std::floor(cast)) {
+    if (cast < 1000000.0 && cast > -1000000.0 && cast == std::floor(cast)){
         std::cout << cast << ".0" << std::endl;
     } else {
         std::cout << cast << std::endl;
@@ -83,7 +81,7 @@ static void castDouble(const double cast){
 static void castFloat(const double cast){
     std::cout << "float: ";
     float f = static_cast<float>(cast);
-    if (f == std::floor(f)) {
+    if (f < 1000000.0f && f > -1000000.0f && f == std::floor(f)) {
         std::cout << f << ".0f" << std::endl;
     } else {
         std::cout << f << "f" << std::endl;
@@ -93,7 +91,7 @@ static void castFloat(const double cast){
 static void convertType(const std::string &literal){
     char* end;
     double cast;
-    
+
     if (literal.length() == 1 && !isdigit(literal[0])){
         cast = static_cast<double>(literal[0]);
     } else{
