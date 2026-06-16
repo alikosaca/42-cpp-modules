@@ -13,7 +13,9 @@ class Rpn {
         Rpn(const Rpn& other);
         Rpn& operator=(const Rpn& other);
         ~Rpn();
-        void Calcature(std::string input);
+        void Run(std::string input);
+        bool CheckStatus();
+        void Calcature(char o);
 
 };
 
