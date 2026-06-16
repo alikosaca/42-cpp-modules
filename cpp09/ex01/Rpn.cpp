@@ -37,16 +37,16 @@ void Rpn::Calcature(char o){
     switch (o)
     {
         case '+':
-            stack.push(n1 + n2);
+            stack.push(n2 + n1);
             break;
         case '-':
-            stack.push(n1 - n2);
+            stack.push(n2 - n1);
             break;
         case '*':
-            stack.push(n1 * n2);
+            stack.push(n2 * n1);
             break;
         case '/':
-            stack.push(n1 / n2);
+            stack.push(n2 / n1);
             break;
         default:
             break;
@@ -59,13 +59,11 @@ void Rpn::Run(std::string input){
     std::istringstream s(input);
     std::string token;
     while (s >> token){
-        if (token.length() == 1){
-            if (std::isdigit(token[0])){
-                stack.push(token[0] - '0');
-            } else if(IsOperator(token[0]) && CheckStatus()){
-                Calcature(token[0]);
-            }
-        }else{
+        if (token.length() == 1 && std::isdigit(token[0])){
+            stack.push(token[0] - '0');
+        } else if (token.length() == 1 && IsOperator(token[0]) && CheckStatus()){
+            Calcature(token[0]);
+        } else{
             std::cout << "Error" << std::endl;
             return ;
         }
