@@ -8,6 +8,11 @@ int main(int ac, char** av)
         return 1;
     }
     Rpn rpn;
-    rpn.Run(av[1]);
+    try{
+        rpn.Run(av[1]);
+    } catch(std::exception& e){
+        std::cerr << "Error" << std::endl;
+        return 1;
+    }
     return 0;
 }
