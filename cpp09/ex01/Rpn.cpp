@@ -46,7 +46,12 @@ void Rpn::Calcature(char o){
             stack.push(n2 * n1);
             break;
         case '/':
-            stack.push(n2 / n1);
+            if (n1 != 0){
+                stack.push(n2 / n1);
+            } else {
+                throw std::runtime_error("");
+                //std::cout << "error" << std::endl;
+            }
             break;
         default:
             break;
@@ -64,9 +69,15 @@ void Rpn::Run(std::string input){
         } else if (token.length() == 1 && IsOperator(token[0]) && CheckStatus()){
             Calcature(token[0]);
         } else{
-            std::cout << "Error" << std::endl;
-            return ;
+            throw std::runtime_error("");
+            //std::cout << "Error" << std::endl;
+            //return ;
         }
     }
-    std::cout << stack.top() << std::endl;
+    if (stack.size() == 1){
+        std::cout << stack.top() << std::endl;
+    } else {
+        throw std::runtime_error("");
+        //std::cout << "Error" << std::endl;
+    }
 }
