@@ -5,7 +5,7 @@
 
 class PmergeMe {
     private:
-        std::vector<std::pair<int, int>> vec;
+        std::vector< std::pair<int, int> > vec;
         int i;
     public:
         PmergeMe();
@@ -14,6 +14,7 @@ class PmergeMe {
         PmergeMe& operator=(const PmergeMe& other);
         ~PmergeMe();
 
+        void Run(int ac, char **av);
 };
 
 #endif 
