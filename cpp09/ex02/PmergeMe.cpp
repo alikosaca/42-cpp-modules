@@ -36,17 +36,31 @@ void pushPair(std::vector<int>& v, std::vector< std::pair<int, int> >& p){
     }
 }
 
+void swapPair(std::vector< std::pair<int, int> >& p){
+    for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
+        if (it+1 != p.end()){
+            if (it->second > it->first){
+                int swap = it->first;
+                it->first = it->second;
+                it->second = swap;
+                it++;
+            }
+        }
+    }
+}
+
 void PmergeMe::Run(int ac, char** av){
     //!parse
     //*push number to vc
     std::vector<int> v;
     std::vector< std::pair<int, int> > p;
     pushNums(ac, av, v);
-    std::cout << "v= " << v.size() << std::endl;
     int straggler_map = 0;
     if (v.size() % 3 != 0){
         straggler_map = v.size() + 1; //*index olarak düşündüğümüz için +1 yazdık.
     }
-    std::cout << straggler_map << std::endl;
+    std::cout << "straggler_map: " << straggler_map << std::endl;
     pushPair(v, p);
+    swapPair(p);
+    
 }
