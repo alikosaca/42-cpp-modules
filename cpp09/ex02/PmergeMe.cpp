@@ -36,43 +36,59 @@ void pushPair(std::vector<int>& v, std::vector< std::pair<int, int> >& p){
     }
 }
 
-void swapPair(std::vector< std::pair<int, int> >& p){
-    for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
-        if (it+1 != p.end()){
-            if (it->second > it->first){
-                int swap = it->first;
-                it->first = it->second;
-                it->second = swap;
-                it++;
-            }
-        }
-    }
-}
 
-void sortMainChain(std::vector< std::pair<int, int> >& p, std::vector<int>& mainChain){
-    for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
-        mainChain.push_back(it->first);
-    }
-}
 
 void PmergeMe::Run(int ac, char** av){
     //!parse
     //*push number to vc
     std::vector<int> v;
     std::vector< std::pair<int, int> > p;
-    std::vector<int> mainChain;
-    std::vector<int> chain;
     pushNums(ac, av, v);
-    int straggler_map = 0;
-    if (v.size() % 3 != 0){
-        straggler_map = v.size() + 1; //*index olarak düşündüğümüz için +1 yazdık.
+    int straggler = 0;
+    bool hasStraggler = false;
+    if (v.size() % 2 != 0){
+        hasStraggler = v.back();
     }
-    std::cout << "straggler_map: " << straggler_map << std::endl;
+    std::cout << "straggler_map: " << straggler << std::endl;
+    std::cout << "straggler: " << hasStraggler << std::endl;
     pushPair(v, p);
-    swapPair(p);
-    sortMainChain(p, mainChain);
 
 }
+
+// void swapPair(std::vector< std::pair<int, int> >& p){
+//     for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
+//         if (it+1 != p.end()){
+//             if (it->second > it->first){
+//                 int swap = it->first;
+//                 it->first = it->second;
+//                 it->second = swap;
+//                 it++;
+//             }
+//         }
+//     }
+// }
+
+
+//     std::vector<int> mainChain;
+
+//     std::vector<int> chain;
+
+//         sortMainChain(p, mainChain);
+
+//     sortchain(p, chain);
+
+
+// void sortMainChain(std::vector< std::pair<int, int> >& p, std::vector<int>& mainChain){
+//     for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
+//         mainChain.push_back(it->first);
+//     }
+// }
+
+// void sortchain(std::vector< std::pair<int, int> >& p, std::vector<int>& chain){
+//     for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
+
+//     }
+// }
 
 
     // for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
