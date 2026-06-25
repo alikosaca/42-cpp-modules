@@ -49,11 +49,19 @@ void swapPair(std::vector< std::pair<int, int> >& p){
     }
 }
 
+void sortMainChain(std::vector< std::pair<int, int> >& p, std::vector<int>& mainChain){
+    for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
+        mainChain.push_back(it->first);
+    }
+}
+
 void PmergeMe::Run(int ac, char** av){
     //!parse
     //*push number to vc
     std::vector<int> v;
     std::vector< std::pair<int, int> > p;
+    std::vector<int> mainChain;
+    std::vector<int> chain;
     pushNums(ac, av, v);
     int straggler_map = 0;
     if (v.size() % 3 != 0){
@@ -62,5 +70,20 @@ void PmergeMe::Run(int ac, char** av){
     std::cout << "straggler_map: " << straggler_map << std::endl;
     pushPair(v, p);
     swapPair(p);
-    
+    sortMainChain(p, mainChain);
+
 }
+
+
+    // for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
+    //     std::cout << "---" << std::endl;
+    //     std::cout << "first: " << it->first << std::endl;
+    //     std::cout << "second: " << it->second << std::endl;
+    //     std::cout << "---" << std::endl;
+    // }
+    // std::cout << "-------------------------------------" << std::endl;
+    // for (std::vector<int>::iterator it = mainChain.begin(); it != mainChain.end(); it++){
+    //     std::cout << "---" << std::endl;
+    //     std::cout << "chain: " << *it << std::endl;
+    //     std::cout << "---" << std::endl;
+    // }
