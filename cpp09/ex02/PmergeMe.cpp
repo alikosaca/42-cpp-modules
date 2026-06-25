@@ -47,11 +47,18 @@ void PmergeMe::Run(int ac, char** av){
     int straggler = 0;
     bool hasStraggler = false;
     if (v.size() % 2 != 0){
-        hasStraggler = v.back();
+        hasStraggler = true;
+        straggler = v.back();
     }
     std::cout << "straggler_map: " << straggler << std::endl;
     std::cout << "straggler: " << hasStraggler << std::endl;
     pushPair(v, p);
+    for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
+        std::cout << "---" << std::endl;
+        std::cout << "first: " << it->first << std::endl;
+        std::cout << "second: " << it->second << std::endl;
+        std::cout << "---" << std::endl;
+    }
 
 }
 
