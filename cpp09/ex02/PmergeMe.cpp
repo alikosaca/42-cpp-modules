@@ -26,8 +26,7 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other){
 }
 
 PmergeMe::~PmergeMe(){}
-#include <string>
-#include <algorithm>
+
 void PmergeMe::pushNums(int ac, char **av){
     vec.push_back(std::atoi(av[i]));
     for (int i = 1; i < ac; i++){
