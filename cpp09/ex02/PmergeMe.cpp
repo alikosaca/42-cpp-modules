@@ -1,6 +1,16 @@
 #include "PmergeMe.hpp"
 #include <iostream>
 #include <algorithm>
+#include <cctype>
+#include <cstdlib>
+#include <limits>
+#include <iomanip>
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
+#include <deque>
+#include <sys/time.h>
 
 PmergeMe::PmergeMe() : i(0) {}
 
@@ -16,10 +26,19 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other){
 }
 
 PmergeMe::~PmergeMe(){}
-
-void pushNums(int ac, char **av, std::vector<int>& v){
-    for(int i = 1; i < ac; i++){
-        v.push_back(std::atoi(av[i]));
+#include <string>
+#include <algorithm>
+void PmergeMe::pushNums(int ac, char **av){
+    vec.push_back(std::atoi(av[i]));
+    for (int i = 1; i < ac; i++){
+        for (int j = 0; av[i][j] != '\0'; j++){
+            if (!(av[i][j] >=  '0' && av[i][j] <= '9')) throw ErrException();
+        }
+        std::string num = (av[i]);
+        long long numS = std::atoll(num.c_str());
+        if (numS > std::numeric_limits<int>::max() || numS < 0) throw ErrException();
+        vec.push_back(static_cast<int>(numS));
+        deq.push_back(static_cast<int>(numS));
     }
 }
 
@@ -103,61 +122,16 @@ void fordJohnson(std::vector<int>& vc){
     }
     std::cout << "---" << std::endl;
 }
-// (8,7), (5,4), (2,1) +s ts = 3
 
 void PmergeMe::Run(int ac, char** av){
     //!parse
     //*push number to vc
-    std::vector<int> v;
-    pushNums(ac, av, v);
-    fordJohnson(v);
+    pushNums(ac, av);
+    std::cout << deq[0] << std::endl;
+    fordJohnson(vec);
 }
 
-// void swapPair(std::vector< std::pair<int, int> >& p){
-//     for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
-//         if (it+1 != p.end()){
-//             if (it->second > it->first){
-//                 int swap = it->first;
-//                 it->first = it->second;
-//                 it->second = swap;
-//                 it++;
-//             }
-//         }
-//     }
-// }
 
-
-//     std::vector<int> mainChain;
-
-//     std::vector<int> chain;
-
-//         sortMainChain(p, mainChain);
-
-//     sortchain(p, chain);
-
-
-// void sortMainChain(std::vector< std::pair<int, int> >& p, std::vector<int>& mainChain){
-//     for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
-//         mainChain.push_back(it->first);
-//     }
-// }
-
-// void sortchain(std::vector< std::pair<int, int> >& p, std::vector<int>& chain){
-//     for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
-
-//     }
-// }
-
-
-    // for (std::vector< std::pair<int, int> >::iterator it = p.begin(); it != p.end(); it++){
-    //     std::cout << "---" << std::endl;
-    //     std::cout << "first: " << it->first << std::endl;
-    //     std::cout << "second: " << it->second << std::endl;
-    //     std::cout << "---" << std::endl;
-    // }
-    // std::cout << "-------------------------------------" << std::endl;
-    // for (std::vector<int>::iterator it = mainChain.begin(); it != mainChain.end(); it++){
-    //     std::cout << "---" << std::endl;
-    //     std::cout << "chain: " << *it << std::endl;
-    //     std::cout << "---" << std::endl;
-    // }
+const char* PmergeMe::ErrException::what() const throw() {
+    return "Error";
+}
