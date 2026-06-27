@@ -100,14 +100,14 @@ std::vector<int> PmergeMe::recursiveVecPair(std::vector< std::pair<int, int> >& 
     return mainChain;
 }
 
-void PmergeMe::fordJohnsonVec(std::vector<int>& vc){
+void PmergeMe::fordJohnsonVec(){
     int straggler = 0;
     bool hasStraggler = false;
-    if (vc.size() % 2 != 0){
+    if (vec.size() % 2 != 0){
         hasStraggler = true;
-        straggler = vc.back(); //3
+        straggler = vec.back(); //3
     }
-    std::vector< std::pair<int, int> > p = pushVecPair(vc);
+    std::vector< std::pair<int, int> > p = pushVecPair(vec);
     std::vector<int> mainChain = recursiveVecPair(p);
     if (hasStraggler){
         std::vector<int>::iterator partnerPos = std::lower_bound(mainChain.begin(), mainChain.end(), straggler);
@@ -175,14 +175,14 @@ std::deque<int> PmergeMe::recursiveDeqPair(std::deque< std::pair<int, int> >& pa
     return mainChain;
 }
 
-void PmergeMe::fordJohnsonDeq(std::deque<int>& vc){
+void PmergeMe::fordJohnsonDeq(){
     int straggler = 0;
     bool hasStraggler = false;
-    if (vc.size() % 2 != 0){
+    if (deq.size() % 2 != 0){
         hasStraggler = true;
-        straggler = vc.back(); //3
+        straggler = deq.back(); //3
     }
-    std::deque< std::pair<int, int> > p = pushDeqPair(vc);
+    std::deque< std::pair<int, int> > p = pushDeqPair(deq);
     std::deque<int> mainChain = recursiveDeqPair(p);
     if (hasStraggler){
         std::deque<int>::iterator partnerPos = std::lower_bound(mainChain.begin(), mainChain.end(), straggler);
@@ -203,8 +203,8 @@ void PmergeMe::Run(int ac, char** av){
         }
     }
     std::cout << std::endl;
-    fordJohnsonVec(vec);
-    fordJohnsonDeq(deq);
+    fordJohnsonVec();
+    fordJohnsonDeq();
     std::cout << "After: ";
     for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++){
         std::cout << *it;
@@ -215,15 +215,6 @@ void PmergeMe::Run(int ac, char** av){
     std::cout << std::endl;
 }
 
-
 const char* PmergeMe::ErrException::what() const throw() {
     return "Error";
 }
-
-
-
-    // std::cout << "---" << std::endl;
-    // for (std::vector<int>::iterator it = mainChain.begin(); it != mainChain.end(); it++){
-    //     std::cout << "chain: " << *it << std::endl;
-    // }
-    // std::cout << "---" << std::endl;

@@ -11,10 +11,10 @@ class PmergeMe {
         std::vector<int> vec;
         std::deque<int> deq;
         void pushNums(int ac, char **av);
-        void fordJohnsonVec(std::vector<int>& vc);
+        void fordJohnsonVec();
         std::vector<int> recursiveVecPair(std::vector< std::pair<int, int> >& pairs);
         std::vector< std::pair<int, int> > pushVecPair(std::vector<int>& v);
-        void fordJohnsonDeq(std::deque<int>& vc);
+        void fordJohnsonDeq();
         std::deque<int> recursiveDeqPair(std::deque< std::pair<int, int> >& pairs);
         std::deque< std::pair<int, int> > pushDeqPair(std::deque<int>& v);
         class ErrException : public std::exception {
