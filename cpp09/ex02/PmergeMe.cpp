@@ -114,6 +114,7 @@ void PmergeMe::fordJohnsonVec(std::vector<int>& vc){
         std::vector<int>::iterator insertPos = std::lower_bound(mainChain.begin(), partnerPos, straggler);
         mainChain.insert(insertPos, straggler);
     }
+    vec = mainChain;
 }
 
 std::deque< std::pair<int, int> > PmergeMe::pushDeqPair(std::deque<int>& v){
@@ -188,13 +189,30 @@ void PmergeMe::fordJohnsonDeq(std::deque<int>& vc){
         std::deque<int>::iterator insertPos = std::lower_bound(mainChain.begin(), partnerPos, straggler);
         mainChain.insert(insertPos, straggler);
     }
+    deq = mainChain;
 }
 
 
 void PmergeMe::Run(int ac, char** av){
     pushNums(ac, av);
+    std::cout << "Before: ";
+    for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++){
+        std::cout << *it;
+        if (it+1 != vec.end()){
+            std::cout << " ";
+        }
+    }
+    std::cout << std::endl;
     fordJohnsonVec(vec);
     fordJohnsonDeq(deq);
+    std::cout << "After: ";
+    for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++){
+        std::cout << *it;
+        if (it+1 != vec.end()){
+            std::cout << " ";
+        }
+    }
+    std::cout << std::endl;
 }
 
 
