@@ -14,6 +14,9 @@ class PmergeMe {
         void fordJohnsonVec(std::vector<int>& vc);
         std::vector<int> recursiveVecPair(std::vector< std::pair<int, int> >& pairs);
         std::vector< std::pair<int, int> > pushVecPair(std::vector<int>& v);
+        void fordJohnsonDeq(std::deque<int>& vc);
+        std::deque<int> recursiveDeqPair(std::deque< std::pair<int, int> >& pairs);
+        std::deque< std::pair<int, int> > pushDeqPair(std::deque<int>& v);
         class ErrException : public std::exception {
             public : virtual const char* what() const throw();
         };

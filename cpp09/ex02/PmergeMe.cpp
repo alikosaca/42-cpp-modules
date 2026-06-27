@@ -116,10 +116,85 @@ void PmergeMe::fordJohnsonVec(std::vector<int>& vc){
     }
 }
 
+std::deque< std::pair<int, int> > PmergeMe::pushDeqPair(std::deque<int>& v){
+    std::deque< std::pair<int, int> > p;
+    for(std::deque<int>::iterator it = v.begin(); it != v.end(); it++){
+        if (it+1 != v.end()){
+            if (*it > *(it+1)){
+                p.push_back(std::make_pair(*it, *(it+1)));
+            } else{
+                p.push_back(std::make_pair( *(it+1), *it ));
+            }
+            it++;
+        }
+    }
+    return p;
+}
+
+std::deque<int> PmergeMe::recursiveDeqPair(std::deque< std::pair<int, int> >& pairs){
+    if (pairs.size() == 1) {
+            std::deque<int> mainChain;
+            mainChain.push_back(pairs[0].second);
+            mainChain.push_back(pairs[0].first);
+            return mainChain;
+    }
+    int st = -1;
+    bool hasSt = false;
+    if (pairs.size() % 2 != 0){
+        hasSt = true;
+        std::cout << pairs.back().first << std::endl;
+        st = pairs.back().first;
+    }
+    std::deque< std::pair<int, int> > nPair;
+    for (std::deque< std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++){
+        if (it+1 != pairs.end()){
+            if (it->first > (it+1)->first){
+                nPair.push_back(std::make_pair(it->first, (it+1)->first));
+            } else{
+                nPair.push_back(std::make_pair( (it+1)->first, it->first ));
+            }
+            it++;
+        }
+    }
+    std::deque<int> mainChain = recursiveDeqPair(nPair);
+    if (hasSt == true){
+        if (mainChain[0] > st){
+            mainChain.insert(mainChain.begin(), st);
+        } else if(mainChain[1] > st) {
+            mainChain.insert(mainChain.begin() + 1, st);
+        } else{
+            mainChain.insert(mainChain.begin() + 2, st);
+        }
+    }
+    for (std::deque< std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++){
+        std::deque<int>::iterator partnerPos = std::lower_bound(mainChain.begin(), mainChain.end(), it->first);
+        std::deque<int>::iterator insertPos = std::lower_bound(mainChain.begin(), partnerPos, it->second);
+        mainChain.insert(insertPos, it->second);
+    }
+    return mainChain;
+}
+
+void PmergeMe::fordJohnsonDeq(std::deque<int>& vc){
+    int straggler = 0;
+    bool hasStraggler = false;
+    if (vc.size() % 2 != 0){
+        hasStraggler = true;
+        straggler = vc.back(); //3
+    }
+    std::deque< std::pair<int, int> > p = pushDeqPair(vc);
+    std::deque<int> mainChain = recursiveDeqPair(p);
+    if (hasStraggler){
+        std::deque<int>::iterator partnerPos = std::lower_bound(mainChain.begin(), mainChain.end(), straggler);
+        std::deque<int>::iterator insertPos = std::lower_bound(mainChain.begin(), partnerPos, straggler);
+        mainChain.insert(insertPos, straggler);
+    }
+}
+
+
 void PmergeMe::Run(int ac, char** av){
     pushNums(ac, av);
-    std::cout << deq[0] << std::endl;
     fordJohnsonVec(vec);
+    fordJohnsonDeq(deq);
 }
 
 
