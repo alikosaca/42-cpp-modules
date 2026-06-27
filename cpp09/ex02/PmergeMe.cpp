@@ -12,15 +12,14 @@
 #include <deque>
 #include <sys/time.h>
 
-PmergeMe::PmergeMe() : i(0) {}
+PmergeMe::PmergeMe() {}
 
-PmergeMe::PmergeMe(int new_i) : i(new_i){}
-
-PmergeMe::PmergeMe(const PmergeMe& other) : i(other.i){}
+PmergeMe::PmergeMe(const PmergeMe& other) : vec(other.vec), deq(other.deq) {}
 
 PmergeMe& PmergeMe::operator=(const PmergeMe& other){
     if (this != &other){
-        this->i = other.i;
+        this->vec = other.vec;
+        this->deq = other.deq;
     }
     return *this;
 }
@@ -28,7 +27,7 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other){
 PmergeMe::~PmergeMe(){}
 
 void PmergeMe::pushNums(int ac, char **av){
-    vec.push_back(std::atoi(av[i]));
+    //vec.push_back(std::atoi(av[i]));
     for (int i = 1; i < ac; i++){
         for (int j = 0; av[i][j] != '\0'; j++){
             if (!(av[i][j] >=  '0' && av[i][j] <= '9')) throw ErrException();
@@ -115,16 +114,9 @@ void PmergeMe::fordJohnsonVec(std::vector<int>& vc){
         std::vector<int>::iterator insertPos = std::lower_bound(mainChain.begin(), partnerPos, straggler);
         mainChain.insert(insertPos, straggler);
     }
-    std::cout << "---" << std::endl;
-    for (std::vector<int>::iterator it = mainChain.begin(); it != mainChain.end(); it++){
-        std::cout << "chain: " << *it << std::endl;
-    }
-    std::cout << "---" << std::endl;
 }
 
 void PmergeMe::Run(int ac, char** av){
-    //!parse
-    //*push number to vc
     pushNums(ac, av);
     std::cout << deq[0] << std::endl;
     fordJohnsonVec(vec);
@@ -134,3 +126,11 @@ void PmergeMe::Run(int ac, char** av){
 const char* PmergeMe::ErrException::what() const throw() {
     return "Error";
 }
+
+
+
+    // std::cout << "---" << std::endl;
+    // for (std::vector<int>::iterator it = mainChain.begin(); it != mainChain.end(); it++){
+    //     std::cout << "chain: " << *it << std::endl;
+    // }
+    // std::cout << "---" << std::endl;
