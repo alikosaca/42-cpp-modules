@@ -27,7 +27,6 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other){
 PmergeMe::~PmergeMe(){}
 
 void PmergeMe::pushNums(int ac, char **av){
-    //vec.push_back(std::atoi(av[i]));
     for (int i = 1; i < ac; i++){
         for (int j = 0; av[i][j] != '\0'; j++){
             if (!(av[i][j] >=  '0' && av[i][j] <= '9')) throw ErrException();
@@ -203,8 +202,12 @@ void PmergeMe::Run(int ac, char** av){
         }
     }
     std::cout << std::endl;
+    double vecStart = getTime();
     fordJohnsonVec();
+    double vecEnd = getTime();
+    double deqStart = getTime();
     fordJohnsonDeq();
+    double deqEnd = getTime();
     std::cout << "After: ";
     for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++){
         std::cout << *it;
@@ -213,6 +216,21 @@ void PmergeMe::Run(int ac, char** av){
         }
     }
     std::cout << std::endl;
+    std::cout << "Time to process a range of "
+          << vec.size() << " elements with std::vector : "
+          << std::fixed << std::setprecision(5)
+          << (vecEnd - vecStart) << " us" << std::endl;
+
+    std::cout << "Time to process a range of "
+          << deq.size() << " elements with std::deque : "
+          << std::fixed << std::setprecision(5)
+          << (deqEnd - deqStart) << " us" << std::endl;
+}
+
+double PmergeMe::getTime() const {
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return ((ts.tv_sec * 1000000) + (ts.tv_nsec / 1000));
 }
 
 const char* PmergeMe::ErrException::what() const throw() {

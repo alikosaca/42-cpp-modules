@@ -17,6 +17,7 @@ class PmergeMe {
         void fordJohnsonDeq();
         std::deque<int> recursiveDeqPair(std::deque< std::pair<int, int> >& pairs);
         std::deque< std::pair<int, int> > pushDeqPair(std::deque<int>& v);
+        double getTime() const;
         class ErrException : public std::exception {
             public : virtual const char* what() const throw();
         };
