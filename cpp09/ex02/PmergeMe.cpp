@@ -1,15 +1,9 @@
 #include "PmergeMe.hpp"
 #include <iostream>
 #include <algorithm>
-#include <cctype>
 #include <cstdlib>
 #include <limits>
 #include <iomanip>
-#include <iostream>
-#include <string>
-#include <utility>
-#include <vector>
-#include <deque>
 #include <sys/time.h>
 
 PmergeMe::PmergeMe() {}
@@ -25,19 +19,6 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other){
 }
 
 PmergeMe::~PmergeMe(){}
-
-// void PmergeMe::pushNums(int ac, char **av){
-//     for (int i = 1; i < ac; i++){
-//         for (int j = 0; av[i][j] != '\0'; j++){
-//             if (!(av[i][j] >=  '0' && av[i][j] <= '9')) throw ErrException();
-//         }
-//         std::string num = (av[i]);
-//         long long numS = std::atoll(num.c_str());
-//         if (numS > std::numeric_limits<int>::max() || numS < 0) throw ErrException();
-//         vec.push_back(static_cast<int>(numS));
-//         deq.push_back(static_cast<int>(numS));
-//     }
-// }
 
 void PmergeMe::validateNums(int ac, char **av, std::vector<int>& before){
     for (int i = 1; i < ac; i++){
