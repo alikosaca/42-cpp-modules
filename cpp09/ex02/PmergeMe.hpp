@@ -10,8 +10,10 @@ class PmergeMe {
     private:
         std::vector<int> vec;
         std::deque<int> deq;
-        int i;
         void pushNums(int ac, char **av);
+        void fordJohnsonVec(std::vector<int>& vc);
+        std::vector<int> recursiveVecPair(std::vector< std::pair<int, int> >& pairs);
+        std::vector< std::pair<int, int> > pushVecPair(std::vector<int>& v);
         class ErrException : public std::exception {
             public : virtual const char* what() const throw();
         };

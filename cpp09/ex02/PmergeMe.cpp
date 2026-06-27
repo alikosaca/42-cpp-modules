@@ -41,7 +41,7 @@ void PmergeMe::pushNums(int ac, char **av){
     }
 }
 
-std::vector< std::pair<int, int> > pushPair(std::vector<int>& v){
+std::vector< std::pair<int, int> > PmergeMe::pushVecPair(std::vector<int>& v){
     std::vector< std::pair<int, int> > p;
     for(std::vector<int>::iterator it = v.begin(); it != v.end(); it++){
         if (it+1 != v.end()){
@@ -56,7 +56,7 @@ std::vector< std::pair<int, int> > pushPair(std::vector<int>& v){
     return p;
 }
 
-std::vector<int> recursivePair(std::vector< std::pair<int, int> >& pairs){
+std::vector<int> PmergeMe::recursiveVecPair(std::vector< std::pair<int, int> >& pairs){
     if (pairs.size() == 1) {
             std::vector<int> mainChain;
             mainChain.push_back(pairs[0].second);
@@ -83,7 +83,7 @@ std::vector<int> recursivePair(std::vector< std::pair<int, int> >& pairs){
             it++;
         }
     }
-    std::vector<int> mainChain = recursivePair(nPair); // 5, 8 --- 2
+    std::vector<int> mainChain = recursiveVecPair(nPair); // 5, 8 --- 2
     if (hasSt == true){
         if (mainChain[0] > st){
             mainChain.insert(mainChain.begin(), st);
@@ -101,15 +101,15 @@ std::vector<int> recursivePair(std::vector< std::pair<int, int> >& pairs){
     return mainChain;
 }
 
-void fordJohnson(std::vector<int>& vc){
+void PmergeMe::fordJohnsonVec(std::vector<int>& vc){
     int straggler = 0;
     bool hasStraggler = false;
     if (vc.size() % 2 != 0){
         hasStraggler = true;
         straggler = vc.back(); //3
     }
-    std::vector< std::pair<int, int> > p = pushPair(vc);
-    std::vector<int> mainChain = recursivePair(p);
+    std::vector< std::pair<int, int> > p = pushVecPair(vc);
+    std::vector<int> mainChain = recursiveVecPair(p);
     if (hasStraggler){
         std::vector<int>::iterator partnerPos = std::lower_bound(mainChain.begin(), mainChain.end(), straggler);
         std::vector<int>::iterator insertPos = std::lower_bound(mainChain.begin(), partnerPos, straggler);
@@ -127,7 +127,7 @@ void PmergeMe::Run(int ac, char** av){
     //*push number to vc
     pushNums(ac, av);
     std::cout << deq[0] << std::endl;
-    fordJohnson(vec);
+    fordJohnsonVec(vec);
 }
 
 
