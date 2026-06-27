@@ -10,7 +10,9 @@ class PmergeMe {
     private:
         std::vector<int> vec;
         std::deque<int> deq;
-        void pushNums(int ac, char **av);
+        void validateNums(int ac, char **av, std::vector<int>& before);
+        void pushVec(int ac, char **av);
+        void pushDeq(int ac, char **av);
         void fordJohnsonVec();
         std::vector<int> recursiveVecPair(std::vector< std::pair<int, int> >& pairs);
         std::vector< std::pair<int, int> > pushVecPair(std::vector<int>& v);

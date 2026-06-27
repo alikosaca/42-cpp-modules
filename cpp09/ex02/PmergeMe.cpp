@@ -26,16 +26,39 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other){
 
 PmergeMe::~PmergeMe(){}
 
-void PmergeMe::pushNums(int ac, char **av){
+// void PmergeMe::pushNums(int ac, char **av){
+//     for (int i = 1; i < ac; i++){
+//         for (int j = 0; av[i][j] != '\0'; j++){
+//             if (!(av[i][j] >=  '0' && av[i][j] <= '9')) throw ErrException();
+//         }
+//         std::string num = (av[i]);
+//         long long numS = std::atoll(num.c_str());
+//         if (numS > std::numeric_limits<int>::max() || numS < 0) throw ErrException();
+//         vec.push_back(static_cast<int>(numS));
+//         deq.push_back(static_cast<int>(numS));
+//     }
+// }
+
+void PmergeMe::validateNums(int ac, char **av, std::vector<int>& before){
     for (int i = 1; i < ac; i++){
         for (int j = 0; av[i][j] != '\0'; j++){
-            if (!(av[i][j] >=  '0' && av[i][j] <= '9')) throw ErrException();
+            if (!(av[i][j] >= '0' && av[i][j] <= '9')) throw ErrException();
         }
-        std::string num = (av[i]);
-        long long numS = std::atoll(num.c_str());
+        long long numS = std::atoll(av[i]);
         if (numS > std::numeric_limits<int>::max() || numS < 0) throw ErrException();
-        vec.push_back(static_cast<int>(numS));
-        deq.push_back(static_cast<int>(numS));
+        before.push_back(static_cast<int>(numS));
+    }
+}
+
+void PmergeMe::pushVec(int ac, char **av){
+    for (int i = 1; i < ac; i++){
+        vec.push_back(static_cast<int>(std::atoll(av[i])));
+    }
+}
+
+void PmergeMe::pushDeq(int ac, char **av){
+    for (int i = 1; i < ac; i++){
+        deq.push_back(static_cast<int>(std::atoll(av[i])));
     }
 }
 
@@ -193,19 +216,22 @@ void PmergeMe::fordJohnsonDeq(){
 
 
 void PmergeMe::Run(int ac, char** av){
-    pushNums(ac, av);
+    std::vector<int> before;
+    validateNums(ac, av, before);
     std::cout << "Before: ";
-    for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++){
+    for (std::vector<int>::iterator it = before.begin(); it != before.end(); it++){
         std::cout << *it;
-        if (it+1 != vec.end()){
+        if (it+1 != before.end()){
             std::cout << " ";
         }
     }
     std::cout << std::endl;
     double vecStart = getTime();
+    pushVec(ac, av);
     fordJohnsonVec();
     double vecEnd = getTime();
     double deqStart = getTime();
+    pushDeq(ac, av);
     fordJohnsonDeq();
     double deqEnd = getTime();
     std::cout << "After: ";
