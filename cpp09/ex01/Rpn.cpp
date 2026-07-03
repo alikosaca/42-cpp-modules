@@ -14,13 +14,6 @@ Rpn& Rpn::operator=(const Rpn& other) {
 
 Rpn::~Rpn() {}
 
-// "9 8 5 * +"
-
-
-// void CheckToken(std::string token){
-//     //if (token.)
-// }
-
 bool IsOperator(char c){
     return c == '+' || c == '-' || c == '*' || c == '/';
 }
@@ -50,34 +43,24 @@ void Rpn::Calcature(char o){
                 stack.push(n2 / n1);
             } else {
                 throw std::runtime_error("");
-                //std::cout << "error" << std::endl;
             }
             break;
         default:
             break;
     }
-    //return c == '+' || c == '-' || c == '*' || c == '/';
 }
-// "9 8 *"
 
 void Rpn::Run(std::string input){
     std::istringstream s(input);
     std::string token;
     while (s >> token){
-        if (token.length() == 1 && std::isdigit(token[0])){
-            stack.push(token[0] - '0');
-        } else if (token.length() == 1 && IsOperator(token[0]) && CheckStatus()){
-            Calcature(token[0]);
-        } else{
-            throw std::runtime_error("");
-            //std::cout << "Error" << std::endl;
-            //return ;
-        }
+        std::cout << "token::: " << token.length() << std::endl;
+        std::cout << token << std::endl;
+        std::cout << "---" << std::endl;
+        if (token.length() == 1 && std::isdigit(token[0])) stack.push(token[0] - '0');
+        else if (token.length() == 1 && IsOperator(token[0]) && CheckStatus()) Calcature(token[0]);
+        else throw std::runtime_error("");
     }
-    if (stack.size() == 1){
-        std::cout << stack.top() << std::endl;
-    } else {
-        throw std::runtime_error("");
-        //std::cout << "Error" << std::endl;
-    }
+    if (stack.size() == 1) std::cout << stack.top() << std::endl;
+    else throw std::runtime_error("");
 }
