@@ -1,6 +1,7 @@
 #include "Rpn.hpp"
 #include <sstream>
 #include <string>
+#include <iostream>
 
 Rpn::Rpn() {}
 Rpn::Rpn(const Rpn& other) : stack(other.stack){}

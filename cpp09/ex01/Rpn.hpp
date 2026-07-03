@@ -1,7 +1,6 @@
 #ifndef RPN
 #define RPN
 
-#include <iostream>
 #include <string>
 #include <stack>
 
