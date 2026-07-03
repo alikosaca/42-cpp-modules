@@ -6,9 +6,7 @@ Rpn::Rpn() {}
 Rpn::Rpn(const Rpn& other) : stack(other.stack){}
 
 Rpn& Rpn::operator=(const Rpn& other) {
-    if (this != &other){
-        stack = other.stack;
-    }
+    if (this != &other) stack = other.stack;
     return *this;
 }
 
@@ -39,11 +37,8 @@ void Rpn::Calcature(char o){
             stack.push(n2 * n1);
             break;
         case '/':
-            if (n1 != 0){
-                stack.push(n2 / n1);
-            } else {
-                throw std::runtime_error("");
-            }
+            if (n1 != 0) stack.push(n2 / n1);
+            else throw std::runtime_error("");
             break;
         default:
             break;
