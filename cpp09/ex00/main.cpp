@@ -5,7 +5,7 @@
 int main(int ac, char** av)
 {
     if (ac != 2){
-        std::cout << "Error: could not open file." << std::endl;
+        std::cerr << "Error: could not open file." << std::endl;
         return 1;
     }
     try {
@@ -13,7 +13,7 @@ int main(int ac, char** av)
         bitcoin.processInput(av[1]);
     }
     catch (std::exception& e) {
-        std::cout << "Error: " << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << std::endl;
     }
     return 0;
 }
