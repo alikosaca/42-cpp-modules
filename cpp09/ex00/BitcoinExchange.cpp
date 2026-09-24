@@ -42,7 +42,7 @@ void BitcoinExchange::InitDatabase(){
     std::string line;
     std::getline(database, line);
     while (std::getline(database, line)){
-        if (line.size() >= 12) this->data[line.substr(0, 10)] = std::atof(line.substr(11).c_str());;
+        if (line.size() >= 12) this->data[line.substr(0, 10)] = std::atof(line.substr(11).c_str());
     }
     database.close();
 }
