@@ -17,10 +17,17 @@ BitcoinExchange::~BitcoinExchange(){}
 
 std::string BitcoinExchange::DateIsValid(std::string line){   
     if (line.length() == 0) return ("null");
-    if (line.length() < 14) throw "bad input => "+ line;
-    if (line[4] != '-' || line[7] != '-') throw "file in invalid format";
+    if (line.length() < 14) throw "bad input => " + line;
     if (line[10] != ' ' || line[11] != '|' || line[12] != ' ') throw "file in invalid format";
     std::string date = line.substr(0, 10);
+    for (size_t i = 0; i < date.length(); i++){
+        if (i == 4 || i == 7) {
+            if (date[i] != '-') throw "file in invalid format"; 
+        }
+        else if (!std::isdigit(date[i])) {
+            throw "file in invalid format";
+        }
+    }
     int year = std::atoi(date.substr(0, 4).c_str());
     int month = std::atoi(date.substr(5, 2).c_str());
     int day = std::atoi(date.substr(8, 2).c_str());
@@ -29,7 +36,7 @@ std::string BitcoinExchange::DateIsValid(std::string line){
 }
 
 float BitcoinExchange::ValueIsValid(std::string valueS){
-    if (valueS.length() > 4 || valueS.length() == 0) throw "incorrect value! must between 0 and 1000 number";
+    if (valueS.length() > 4 || valueS.length() == 0) throw "incorrect value! must between 0 and 1000 number"; //burada "valueS.length() > 4 || " kısmını sil
     float value = std::atof(valueS.c_str());
     if (value > 1000) throw "too large a number.";
     else if (value < 0) throw "not a positive number.";
