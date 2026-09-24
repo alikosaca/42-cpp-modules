@@ -4,6 +4,8 @@
 #include <fstream>
 #include <cstdlib>
 #include <map>
+#include <stdexcept>
+#include <cctype>
 
 BitcoinExchange::BitcoinExchange(){}
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) : data(other.data){}
@@ -16,36 +18,44 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other){
 BitcoinExchange::~BitcoinExchange(){}
 
 std::string BitcoinExchange::DateIsValid(std::string line){   
-    if (line.length() == 0) return ("null");
-    if (line.length() < 14) throw "bad input => " + line;
-    if (line[10] != ' ' || line[11] != '|' || line[12] != ' ') throw "file in invalid format";
+    if (line[10] != ' ' || line[11] != '|' || line[12] != ' ') throw std::runtime_error("file in invalid format");
     std::string date = line.substr(0, 10);
     for (size_t i = 0; i < date.length(); i++){
         if (i == 4 || i == 7) {
-            if (date[i] != '-') throw "file in invalid format"; 
+            if (date[i] != '-') throw std::runtime_error("file in invalid format"); 
         }
         else if (!std::isdigit(date[i])) {
-            throw "file in invalid format";
+            throw std::runtime_error("file in invalid format");
         }
     }
     int year = std::atoi(date.substr(0, 4).c_str());
     int month = std::atoi(date.substr(5, 2).c_str());
     int day = std::atoi(date.substr(8, 2).c_str());
-    if (year < 999 || (month > 12 || month < 0) || (day > 31 || day < 0)) throw "Invalid date information.";
+    if ((month > 12 || month < 1) || (day > 31 || day < 1)) throw std::runtime_error("bad input => " + line);
+    int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (year / 4 * 4 == year) daysInMonth[1] = 29;
+    if (day > daysInMonth[month - 1]) throw std::runtime_error("bad input => " + line);
+
     return date;
 }
 
 float BitcoinExchange::ValueIsValid(std::string valueS){
-    if (valueS.length() > 4 || valueS.length() == 0) throw "incorrect value! must between 0 and 1000 number"; //burada "valueS.length() > 4 || " kısmını sil
+    int dots = 0;
+    for (size_t i = 0; i < valueS.length(); i++){
+        if (valueS[i] == '.') dots++;
+        else if (i == 0 && valueS[i] == '-') continue;
+        else if (!std::isdigit(valueS[i])) throw std::runtime_error("bad input => " + valueS);
+    }
+    if (dots > 1) throw std::runtime_error("bad input => " + valueS);
+    if (valueS[0] == '-') throw std::runtime_error("not a positive number.");
     float value = std::atof(valueS.c_str());
-    if (value > 1000) throw "too large a number.";
-    else if (value < 0) throw "not a positive number.";
+    if (value > 1000) throw std::runtime_error("too large a number.");
     return value;
 }
 
 void BitcoinExchange::InitDatabase(){
     std::ifstream database("data.csv");
-    if (!database.is_open()) throw "data.csv could not open file";
+    if (!database.is_open()) throw std::runtime_error("data.csv could not open file");
     std::string line;
     std::getline(database, line);
     while (std::getline(database, line)){
@@ -55,30 +65,29 @@ void BitcoinExchange::InitDatabase(){
 }
 
 void BitcoinExchange::Exchange(std::string& date, float& value){
-    std::map<std::string, float>::iterator it = this->data.lower_bound(date);
-    if (it->first != date && it != this->data.begin()) --it;
-    float res = value * it->second;
-    std::cout << date << " => " << value << " = " << res << std::endl;
+    std::map<std::string, float>::iterator it = this->data.upper_bound(date);
+    if (it == data.begin()) throw std::runtime_error("no data before => " + date);
+    --it;
+    std::cout << date << " => " << value << " = " << (value * it->second) << std::endl;
 }
 
 void BitcoinExchange::processInput(std::string input){    
     InitDatabase();
     std::ifstream file(input.c_str());
-    if (!file.is_open()) throw "could not open file.";
+    if (!file.is_open()) throw std::runtime_error("could not open file.");
     std::string line;
     std::string date;
     float value;
     std::getline(file, line);
     while (std::getline(file, line)){
         try{
+            if (line.length() < 14) throw std::runtime_error("bad input => " + line);
             date = DateIsValid(line);
-            if (date == "null") continue;
             value = ValueIsValid(line.substr(13));
             Exchange(date, value);
-        }catch (const std::string& e) {
-            std::cout << "Error: " << e << std::endl;
-        }catch(const char* e){
-            std::cout << "Error: " << e << std::endl;
+        }
+        catch (const std::exception& e) {
+            std::cout << "Error: " << e.what() << std::endl;
         }
     }
     file.close();
