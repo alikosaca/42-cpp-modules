@@ -55,12 +55,7 @@ void BitcoinExchange::Exchange(std::string& date, float& value){
 }
 
 void BitcoinExchange::processInput(std::string input){    
-    try{
-        InitDatabase();
-    } catch(const char* e){
-        std::cout << "Error: " << e << std::endl;
-        return;
-    }
+    InitDatabase();
     std::ifstream file(input.c_str());
     if (!file.is_open()) throw "could not open file.";
     std::string line;
