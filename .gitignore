@@ -1,3 +1,8 @@
+# Files without extensions
+*
+!*/
+!*.*
+
 # Prerequisites
 *.d
 
@@ -36,6 +41,9 @@
 *.exe
 *.out
 *.app
+
+# Text files
+*.txt
 
 # debug information files
 *.dwo
