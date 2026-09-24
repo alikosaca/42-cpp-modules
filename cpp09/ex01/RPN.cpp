@@ -1,27 +1,29 @@
-#include "Rpn.hpp"
+#include "RPN.hpp"
 #include <sstream>
 #include <string>
 #include <iostream>
+#include <stdexcept>
+#include <cctype>
 
-Rpn::Rpn() {}
-Rpn::Rpn(const Rpn& other) : stack(other.stack){}
+RPN::RPN() {}
+RPN::RPN(const RPN& other) : stack(other.stack){}
 
-Rpn& Rpn::operator=(const Rpn& other) {
+RPN& RPN::operator=(const RPN& other) {
     if (this != &other) stack = other.stack;
     return *this;
 }
 
-Rpn::~Rpn() {}
+RPN::~RPN() {}
 
 bool IsOperator(char c){
     return c == '+' || c == '-' || c == '*' || c == '/';
 }
 
-bool Rpn::CheckStatus(){
+bool RPN::CheckStatus(){
     return (stack.size() >= 2);
 }
 
-void Rpn::Calcature(char o){
+void RPN::Calcature(char o){
     int n1 = stack.top();
     stack.pop();
     int n2 = stack.top();
@@ -46,7 +48,7 @@ void Rpn::Calcature(char o){
     }
 }
 
-void Rpn::Run(std::string input){
+void RPN::Run(std::string input){
     std::istringstream s(input);
     std::string token;
     while (s >> token){
