@@ -5,11 +5,13 @@
 #include <deque>
 #include <exception>
 #include <utility>
+#include <cstddef>
 
 class PmergeMe {
     private:
         std::vector<int> vec;
         std::deque<int> deq;
+
         void validateNums(int ac, char **av, std::vector<int>& before);
         void pushVec(int ac, char **av);
         void pushDeq(int ac, char **av);

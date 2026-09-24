@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <limits>
 #include <iomanip>
-#include <sys/time.h>
+#include <ctime>
 
 PmergeMe::PmergeMe() {}
 
@@ -22,6 +22,7 @@ PmergeMe::~PmergeMe(){}
 
 void PmergeMe::validateNums(int ac, char **av, std::vector<int>& before){
     for (int i = 1; i < ac; i++){
+        if (av[i][0] == '\0') throw ErrException();
         for (int j = 0; av[i][j] != '\0'; j++){
             if (!(av[i][j] >= '0' && av[i][j] <= '9')) throw ErrException();
         }
@@ -69,9 +70,6 @@ std::vector<int> PmergeMe::recursiveVecPair(std::vector< std::pair<int, int> >& 
     bool hasSt = false;
     if (pairs.size() % 2 != 0){
         hasSt = true;
-        std::cout << "test2---" << std::endl;
-        std::cout << pairs.back().first << std::endl;
-        std::cout << "test2---" << std::endl;
         st = pairs.back().first;
     }
     std::vector< std::pair<int, int> > nPair;
@@ -85,15 +83,9 @@ std::vector<int> PmergeMe::recursiveVecPair(std::vector< std::pair<int, int> >& 
             it++;
         }
     }
-    std::vector<int> mainChain = recursiveVecPair(nPair); // 5, 8 --- 2
+    std::vector<int> mainChain = recursiveVecPair(nPair);
     if (hasSt == true){
-        if (mainChain[0] > st){
-            mainChain.insert(mainChain.begin(), st);
-        } else if(mainChain[1] > st) {
-            mainChain.insert(mainChain.begin() + 1, st);
-        } else{
-            mainChain.insert(mainChain.begin() + 2, st);
-        }
+        mainChain.insert(std::lower_bound(mainChain.begin(), mainChain.end(), st), st);
     }
     for (std::vector< std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++){
         std::vector<int>::iterator partnerPos = std::lower_bound(mainChain.begin(), mainChain.end(), it->first);
@@ -104,11 +96,12 @@ std::vector<int> PmergeMe::recursiveVecPair(std::vector< std::pair<int, int> >& 
 }
 
 void PmergeMe::fordJohnsonVec(){
+    if (vec.size() < 2) return;
     int straggler = 0;
     bool hasStraggler = false;
     if (vec.size() % 2 != 0){
         hasStraggler = true;
-        straggler = vec.back(); //3
+        straggler = vec.back();
     }
     std::vector< std::pair<int, int> > p = pushVecPair(vec);
     std::vector<int> mainChain = recursiveVecPair(p);
@@ -146,7 +139,6 @@ std::deque<int> PmergeMe::recursiveDeqPair(std::deque< std::pair<int, int> >& pa
     bool hasSt = false;
     if (pairs.size() % 2 != 0){
         hasSt = true;
-        std::cout << pairs.back().first << std::endl;
         st = pairs.back().first;
     }
     std::deque< std::pair<int, int> > nPair;
@@ -162,13 +154,7 @@ std::deque<int> PmergeMe::recursiveDeqPair(std::deque< std::pair<int, int> >& pa
     }
     std::deque<int> mainChain = recursiveDeqPair(nPair);
     if (hasSt == true){
-        if (mainChain[0] > st){
-            mainChain.insert(mainChain.begin(), st);
-        } else if(mainChain[1] > st) {
-            mainChain.insert(mainChain.begin() + 1, st);
-        } else{
-            mainChain.insert(mainChain.begin() + 2, st);
-        }
+        mainChain.insert(std::lower_bound(mainChain.begin(), mainChain.end(), st), st);
     }
     for (std::deque< std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++){
         std::deque<int>::iterator partnerPos = std::lower_bound(mainChain.begin(), mainChain.end(), it->first);
@@ -179,11 +165,12 @@ std::deque<int> PmergeMe::recursiveDeqPair(std::deque< std::pair<int, int> >& pa
 }
 
 void PmergeMe::fordJohnsonDeq(){
+    if (vec.size() < 2) return;
     int straggler = 0;
     bool hasStraggler = false;
     if (deq.size() % 2 != 0){
         hasStraggler = true;
-        straggler = deq.back(); //3
+        straggler = deq.back();
     }
     std::deque< std::pair<int, int> > p = pushDeqPair(deq);
     std::deque<int> mainChain = recursiveDeqPair(p);
