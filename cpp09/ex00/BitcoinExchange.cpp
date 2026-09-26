@@ -31,8 +31,11 @@ std::string BitcoinExchange::DateIsValid(std::string line){
     int year = std::atoi(date.substr(0, 4).c_str());
     int month = std::atoi(date.substr(5, 2).c_str());
     int day = std::atoi(date.substr(8, 2).c_str());
+
     if ((month > 12 || month < 1) || (day > 31 || day < 1)) throw std::runtime_error("bad input => " + line);
+
     int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
     if (year / 4 * 4 == year) daysInMonth[1] = 29;
     if (day > daysInMonth[month - 1]) throw std::runtime_error("bad input => " + line);
 
@@ -92,4 +95,3 @@ void BitcoinExchange::processInput(std::string input){
     }
     file.close();
 }
-
