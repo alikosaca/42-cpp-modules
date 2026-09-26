@@ -141,9 +141,7 @@ void PmergeMe::fordJohnsonVec(){
     std::vector< std::pair<int, int> > p = pushVecPair(vec);
     std::vector<int> mainChain = recursiveVecPair(p);
     if (hasStraggler){
-        std::vector<int>::iterator partnerPos = std::lower_bound(mainChain.begin(), mainChain.end(), straggler);
-        std::vector<int>::iterator insertPos = std::lower_bound(mainChain.begin(), partnerPos, straggler);
-        mainChain.insert(insertPos, straggler);
+        mainChain.insert(std::lower_bound(mainChain.begin(), mainChain.end(), straggler), straggler);
     }
     vec = mainChain;
 }
@@ -216,7 +214,7 @@ std::deque<int> PmergeMe::recursiveDeqPair(std::deque< std::pair<int, int> >& pa
     return mainChain;
 }
 void PmergeMe::fordJohnsonDeq(){
-    if (vec.size() < 2) return;
+    if (deq.size() < 2) return;
     int straggler = 0;
     bool hasStraggler = false;
     if (deq.size() % 2 != 0){
@@ -226,10 +224,7 @@ void PmergeMe::fordJohnsonDeq(){
     std::deque< std::pair<int, int> > p = pushDeqPair(deq);
     std::deque<int> mainChain = recursiveDeqPair(p);
     if (hasStraggler){
-        std::deque<int>::iterator partnerPos = std::lower_bound(mainChain.begin(), mainChain.end(), straggler);
-        std::deque<int>::iterator insertPos = std::lower_bound(mainChain.begin(), partnerPos, straggler);
-        mainChain.insert(insertPos, straggler);
-    }
+        mainChain.insert(std::lower_bound(mainChain.begin(), mainChain.end(), straggler), straggler);    }
     deq = mainChain;
 }
 
@@ -275,7 +270,7 @@ void PmergeMe::Run(int ac, char** av){
 double PmergeMe::getTime() const {
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
-    return ((ts.tv_sec * 1000000) + (ts.tv_nsec / 1000));
+    return ts.tv_sec * 1000000.0 + ts.tv_nsec / 1000.0;
 }
 
 const char* PmergeMe::ErrException::what() const throw() {
